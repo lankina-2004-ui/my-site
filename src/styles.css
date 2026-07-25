@@ -1,0 +1,204 @@
+:root {
+  color: #1a1a1a;
+  background: #fdfdfd;
+  font-family: 'Roboto', Arial, sans-serif;
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-width: 1120px;
+  min-height: 800px;
+  margin: 0;
+}
+
+body {
+  overflow: auto;
+}
+
+button {
+  appearance: none;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  color: inherit;
+  font: inherit;
+}
+
+.page {
+  position: relative;
+  min-width: 1120px;
+  min-height: 800px;
+  height: 100vh;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 15% 20%, rgb(0 0 0 / 2.5%) 0 0.45px, transparent 0.75px)
+      0 0 / 3px 3px,
+    radial-gradient(circle at 75% 60%, rgb(0 0 0 / 1.7%) 0 0.5px, transparent 0.8px)
+      1px 1px / 4px 4px,
+    #fdfdfd;
+}
+
+.intro {
+  position: absolute;
+  z-index: 2;
+  top: 36px;
+  left: 32px;
+  font-family: 'Roboto Mono', monospace;
+  font-weight: 400;
+}
+
+.intro h1 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 400;
+  letter-spacing: 0.45px;
+  line-height: 1.25;
+}
+
+.intro__meta {
+  margin-top: 28px;
+  color: #777;
+  font-size: 13px;
+  letter-spacing: 0.4px;
+  line-height: 25px;
+}
+
+.intro__meta p,
+.location p {
+  margin: 0;
+}
+
+.navigation {
+  position: absolute;
+  z-index: 3;
+  top: 32px;
+  right: 0;
+  display: flex;
+  align-items: stretch;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 14px;
+  letter-spacing: 0.45px;
+}
+
+.navigation button,
+.hero__projects {
+  height: 40px;
+  cursor: pointer;
+  line-height: 40px;
+  transition:
+    color 140ms ease,
+    background-color 140ms ease;
+}
+
+.navigation__cv {
+  width: 163px;
+  margin-right: 0;
+  background: transparent;
+}
+
+.navigation__cv:hover,
+.navigation__cv:focus-visible {
+  background: #ffff85;
+  outline: none;
+}
+
+.navigation__contact {
+  width: 177px;
+  padding-left: 21px;
+  background: #1a1a1a;
+  color: #fff;
+  text-align: left;
+}
+
+.navigation__contact:hover,
+.navigation__contact:focus-visible,
+.hero__projects:hover,
+.hero__projects:focus-visible {
+  background: #ffff85;
+  color: #1a1a1a;
+  outline: none;
+}
+
+.hero {
+  position: absolute;
+  inset: 0;
+}
+
+.hero__role {
+  position: absolute;
+  z-index: 2;
+  top: 186px;
+  left: calc(50% - 306px);
+  display: grid;
+  width: 128px;
+  height: 24px;
+  place-items: center;
+  background: #ffff85;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 12px;
+  line-height: 1;
+}
+
+.hero__photo {
+  position: absolute;
+  top: 134px;
+  left: calc(50% + 0.5px);
+  display: block;
+  width: 361px;
+  height: 436px;
+  transform: translateX(-50%);
+}
+
+.hero__description {
+  position: absolute;
+  top: 591px;
+  left: 50%;
+  width: 520px;
+  margin: 0;
+  transform: translateX(-50%);
+  color: #181818;
+  font-size: 24px;
+  letter-spacing: -0.35px;
+  line-height: 33px;
+  text-align: center;
+}
+
+.hero__projects {
+  position: absolute;
+  top: 700px;
+  left: 50%;
+  width: 136px;
+  transform: translateX(-50%);
+  background: #1a1a1a;
+  color: #fff;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 14px;
+  letter-spacing: 0.45px;
+}
+
+.location {
+  position: absolute;
+  z-index: 2;
+  right: 32px;
+  bottom: 54px;
+  color: #858585;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 13px;
+  letter-spacing: 0.35px;
+  line-height: 25px;
+  text-align: right;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .navigation button,
+  .hero__projects {
+    transition: none;
+  }
+}
