@@ -68,9 +68,11 @@ button {
 }
 
 .site-header {
-  position: sticky;
+  position: fixed;
   z-index: 1000;
   top: 0;
+  left: 0;
+  width: 100%;
   height: 0;
   pointer-events: none;
 }
@@ -171,13 +173,19 @@ button {
   border: 1px solid #1a1a1a;
   margin-right: 0;
   background: transparent;
+  color: #1a1a1a;
   text-align: center;
+  transition:
+    color 140ms ease,
+    background-color 140ms ease,
+    border-color 220ms ease;
 }
 
 .navigation__cv:hover,
 .navigation__cv:focus-visible {
-  background: #1a1a1a;
-  color: #fff;
+  border-color: rgb(26 26 26 / 40%);
+  background: transparent;
+  color: rgb(26 26 26 / 40%);
   outline: none;
 }
 
@@ -208,7 +216,7 @@ button {
 .hero__role {
   position: absolute;
   z-index: 2;
-  top: 186px;
+  top: calc(50% - 253px);
   left: calc(50% - 306px);
   display: grid;
   width: 128px;
@@ -222,7 +230,7 @@ button {
 
 .hero__photo {
   position: absolute;
-  top: 134px;
+  top: calc(50% - 307px);
   left: calc(50% + 0.5px);
   display: block;
   width: 361px;
@@ -232,7 +240,7 @@ button {
 
 .hero__description {
   position: absolute;
-  top: 591px;
+  top: calc(50% + 150px);
   left: 50%;
   width: 520px;
   margin: 0;
@@ -246,7 +254,7 @@ button {
 
 .hero__projects {
   position: absolute;
-  top: 700px;
+  top: calc(50% + 259px);
   left: 50%;
   display: grid;
   height: 48px;
@@ -463,10 +471,32 @@ button {
 }
 
 .portfolio__preview-frame {
+  position: relative;
   display: block;
   width: 712px;
   height: 400px;
   overflow: hidden;
+}
+
+.portfolio__coming-soon {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 1.2;
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 300ms ease;
+}
+
+.portfolio__project--ai .portfolio__preview-frame:hover .portfolio__coming-soon {
+  opacity: 1;
 }
 
 .portfolio__preview {
@@ -529,6 +559,11 @@ button {
   overflow: hidden;
 }
 
+.case-page > .footer {
+  margin-top: 120px;
+  margin-bottom: -88px;
+}
+
 .footer__visual {
   position: absolute;
   z-index: 0;
@@ -537,10 +572,11 @@ button {
 }
 
 .footer__visual--desktop {
-  top: 117px;
-  left: 334px;
+  top: 137px;
+  left: 50%;
   width: 754px;
   height: 683px;
+  transform: translateX(-50%);
 }
 
 .footer__visual--mobile {
@@ -550,7 +586,7 @@ button {
 .footer__blog {
   position: absolute;
   z-index: 2;
-  top: 33px;
+  top: 164px;
   left: 32px;
   font-family: 'JetBrains Mono', monospace;
   font-weight: 400;
@@ -570,6 +606,7 @@ button {
 }
 
 .footer__blog-channel {
+  position: relative;
   display: block;
   margin-top: 17px !important;
   color: #181818;
@@ -584,7 +621,7 @@ button {
 .footer__social {
   position: absolute;
   z-index: 2;
-  top: 227px;
+  top: 247px;
   height: 42px;
   background: transparent;
   color: #181818;
@@ -599,39 +636,55 @@ button {
   white-space: nowrap;
 }
 
+.footer__blog-channel::after,
+.footer__social::after {
+  position: absolute;
+  right: 0;
+  bottom: -4px;
+  left: 0;
+  height: 1px;
+  background: currentColor;
+  content: '';
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.footer__social::after {
+  bottom: -2px;
+  height: 2px;
+}
+
 .footer__blog-channel:hover,
 .footer__blog-channel:focus-visible,
 .footer__social:hover,
 .footer__social:focus-visible {
-  text-decoration-line: underline;
-  text-decoration-color: #1a1a1a;
-  text-underline-offset: 4px;
+  opacity: 1;
   outline: none;
 }
 
-.footer__blog-channel:hover,
-.footer__blog-channel:focus-visible {
-  text-decoration-thickness: 1px;
-}
-
-.footer__social:hover,
-.footer__social:focus-visible {
-  text-decoration-thickness: 2px;
+.footer__blog-channel:hover::after,
+.footer__blog-channel:focus-visible::after,
+.footer__social:hover::after,
+.footer__social:focus-visible::after {
+  transform: scaleX(1);
 }
 
 .footer__social--telegram {
-  left: 380px;
+  left: calc(50% - 356px);
   letter-spacing: -0.7px;
 }
 
 .footer__social--email {
-  left: 672px;
+  left: 50%;
   letter-spacing: 0.25px;
-  transform: scaleY(0.93);
+  transform: translateX(-50%) scaleY(0.93);
+  transform-origin: center top;
 }
 
 .footer__social--instagram {
-  left: 917px;
+  right: calc(50% - 356px);
+  left: auto;
   letter-spacing: -0.3px;
   transform: none;
 }
@@ -1013,7 +1066,7 @@ html:has(.case-page) #root {
   }
 
   .intro {
-    top: 128px;
+    top: 84px;
     left: 16px;
   }
 
@@ -1025,7 +1078,7 @@ html:has(.case-page) #root {
 
   .home-meta {
     position: absolute;
-    top: 158px;
+    top: 120px;
     left: 16px;
     width: auto;
     height: auto;
@@ -1036,7 +1089,7 @@ html:has(.case-page) #root {
   }
 
   .navigation {
-    top: 64px;
+    top: 16px;
     right: 16px;
     left: 16px;
     justify-content: space-between;
@@ -1067,8 +1120,13 @@ html:has(.case-page) #root {
     height: 812px;
   }
 
+  .about {
+    min-height: 607px;
+    height: 607px;
+  }
+
   .hero__role {
-    top: 241px;
+    top: 220px;
     left: 87px;
     width: 128px;
     height: 24px;
@@ -1084,7 +1142,7 @@ html:has(.case-page) #root {
   }
 
   .hero__description {
-    top: 594px;
+    top: 584px;
     width: 330px;
     font-size: 16px;
     letter-spacing: -0.22px;
@@ -1092,7 +1150,7 @@ html:has(.case-page) #root {
   }
 
   .hero__projects {
-    top: 657px;
+    top: 644px;
     width: 144px;
     height: 48px;
     font-size: 13px;
@@ -1100,20 +1158,11 @@ html:has(.case-page) #root {
   }
 
   .location {
-    position: absolute;
-    top: 750px;
-    left: 16px;
-    width: auto;
-    height: auto;
-    margin: 0;
-    font-size: 8px;
-    letter-spacing: 0;
-    line-height: 16px;
-    text-align: left;
+    display: none;
   }
 
   .about__description {
-    top: 167px;
+    top: 29px;
     width: 330px;
     font-size: 16px;
     letter-spacing: -0.35px;
@@ -1140,7 +1189,7 @@ html:has(.case-page) #root {
   }
 
   .about__collage {
-    top: 380px;
+    top: 205px;
     left: 50%;
     width: 279px;
     height: 285px;
@@ -1152,29 +1201,33 @@ html:has(.case-page) #root {
   }
 
   .about__tag--digital {
-    top: 405px;
+    top: 232px;
     left: 48px;
   }
 
   .about__tag--beauty {
-    top: 423px;
+    top: 244px;
     right: 38px;
     left: auto;
   }
 
   .about__tag--fashion {
-    top: 632px;
+    top: 458px;
     left: 37px;
   }
 
   .case-site-header {
-    display: none;
+    display: block;
+  }
+
+  .case-site-header .intro {
+    display: block;
   }
 
   .case-page {
     width: 100%;
     min-width: 0;
-    padding: 132px 16px 48px;
+    padding: 200px 16px 48px;
   }
 
   .case-close--desktop {
@@ -1184,8 +1237,10 @@ html:has(.case-page) #root {
   .case-close--mobile {
     position: fixed;
     z-index: 50;
-    top: 24px;
-    left: 16px;
+    top: auto;
+    right: 16px;
+    bottom: 24px;
+    left: auto;
     display: grid;
     width: 95px;
     height: 48px;
@@ -1400,9 +1455,10 @@ html:has(.case-page) #root {
   }
 
   .sound-case .case-close--mobile {
-    top: 24px;
-    bottom: auto;
-    left: 16px;
+    top: auto;
+    right: 16px;
+    bottom: 24px;
+    left: auto;
   }
 
   .sound-next__tag--desktop {
@@ -1432,9 +1488,10 @@ html:has(.case-page) #root {
   }
 
   .japan-case .case-close--mobile {
-    top: 24px;
-    bottom: auto;
-    left: 16px;
+    top: auto;
+    right: 16px;
+    bottom: 24px;
+    left: auto;
   }
 
   .japan-case__solution-image {
@@ -1457,7 +1514,7 @@ html:has(.case-page) #root {
   .portfolio {
     width: 100vw;
     min-width: 0;
-    height: 870px;
+    height: 810px;
   }
 
   .portfolio-more {
@@ -1467,13 +1524,13 @@ html:has(.case-page) #root {
   }
 
   .portfolio__decoration {
-    top: 4px;
-    width: 400px;
+    top: -59px;
+    width: 430px;
     height: auto;
   }
 
   .portfolio__heading {
-    top: 110px;
+    top: 50px;
     font-size: 23px;
     line-height: 27px;
     letter-spacing: -0.3px;
@@ -1496,11 +1553,11 @@ html:has(.case-page) #root {
   }
 
   .portfolio__project--gramy {
-    top: 180px;
+    top: 120px;
   }
 
   .portfolio__project--ai {
-    top: 545px;
+    top: 485px;
   }
 
   .portfolio__project--sound {
@@ -1603,6 +1660,10 @@ html:has(.case-page) #root {
     height: 812px;
   }
 
+  .case-page > .footer {
+    margin: 80px 0 -48px -16px;
+  }
+
   .footer__visual--desktop {
     display: none;
   }
@@ -1617,7 +1678,7 @@ html:has(.case-page) #root {
   }
 
   .footer__blog {
-    top: 79px;
+    top: 87px;
     left: 16px;
   }
 
@@ -1660,6 +1721,7 @@ html:has(.case-page) #root {
 
   .footer__social--instagram {
     top: 323px;
+    right: auto;
     letter-spacing: -0.1px;
   }
 
