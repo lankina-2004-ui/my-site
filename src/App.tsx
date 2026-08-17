@@ -173,7 +173,7 @@ function HomePage() {
         <article className="portfolio__project portfolio__project--gramy">
           <a
             className="portfolio__project-link"
-            href="/gramy"
+            href="#/gramy"
             aria-label="Открыть проект GRAMY MOBILE APP"
           >
             <span className="portfolio__preview-frame">
@@ -217,7 +217,7 @@ function HomePage() {
         <article className="portfolio__project portfolio__project--sound">
           <a
             className="portfolio__project-link"
-            href="/my-sound"
+            href="#/my-sound"
             aria-label="Открыть проект MY SOUND MOBILE APP"
           >
             <span className="portfolio__preview-frame">
@@ -243,7 +243,7 @@ function HomePage() {
         >
           <a
             className="portfolio__project-link"
-            href="/japan"
+            href="#/japan"
             aria-label="Открыть проект ЯПОНСКИЙ КОНЦЕПТ СЪЕМКИ"
           >
             <span className="portfolio__preview-frame">
