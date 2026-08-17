@@ -326,15 +326,32 @@ function HomePage() {
 function App() {
   useScrollReveal()
 
+  const [route, setRoute] = useState(() => window.location.hash)
+
+  useEffect(() => {
+    const handleRouteChange = () => {
+      setRoute(window.location.hash)
+      window.scrollTo(0, 0)
+    }
+
+    window.addEventListener('hashchange', handleRouteChange)
+
+    return () => {
+      window.removeEventListener('hashchange', handleRouteChange)
+    }
+  }, [])
+
   const isGramyCase =
-    window.location.pathname === '/gramy' || window.location.hash === '#/gramy'
+    window.location.pathname === '/gramy' || route === '#/gramy'
+
   const isMySoundCase =
     window.location.pathname === '/my-sound' ||
     window.location.pathname === '/mysound' ||
-    window.location.hash === '#/my-sound' ||
-    window.location.hash === '#/mysound'
+    route === '#/my-sound' ||
+    route === '#/mysound'
+
   const isJapanCase =
-    window.location.pathname === '/japan' || window.location.hash === '#/japan'
+    window.location.pathname === '/japan' || route === '#/japan'
 
   if (isGramyCase) {
     return <GramyCase />
@@ -350,5 +367,4 @@ function App() {
 
   return <HomePage />
 }
-
 export default App
