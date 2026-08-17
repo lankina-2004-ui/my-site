@@ -23,7 +23,7 @@ function CloseLink({ mobile = false }: { mobile?: boolean }) {
   return (
     <a
       className={`case-close ${mobile ? 'case-close--mobile' : 'case-close--desktop'}`}
-      href="/"
+      href="#/"
       aria-label="Вернуться на главную"
     >
       {mobile ? 'НАЗАД [←]' : 'ЗАКРЫТЬ'}
@@ -212,7 +212,7 @@ function JapanCase() {
         <section className="case-next japan-next" aria-labelledby="japan-next-title">
           <a
             className="case-next__link"
-            href="/gramy"
+            href="#/gramy"
             aria-label="Открыть проект GRAMY MOBILE APP"
           >
             <h2 id="japan-next-title">СЛЕДУЮЩИЙ ПРОЕКТ</h2>
