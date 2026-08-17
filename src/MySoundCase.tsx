@@ -26,7 +26,7 @@ function CloseLink({ mobile = false }: { mobile?: boolean }) {
   return (
     <a
       className={`case-close ${mobile ? 'case-close--mobile' : 'case-close--desktop'}`}
-      href="/"
+      href="#/"
       aria-label="Вернуться на главную"
     >
       {mobile ? 'НАЗАД [←]' : 'ЗАКРЫТЬ'}
@@ -258,7 +258,7 @@ function MySoundCase() {
         <section className="case-next sound-next" aria-labelledby="sound-next-title">
           <a
             className="case-next__link"
-            href="/japan"
+            href="#/japan"
             aria-label="Открыть проект ЯПОНСКИЙ КОНЦЕПТ СЪЕМКИ"
           >
             <h2 id="sound-next-title">СЛЕДУЮЩИЙ ПРОЕКТ</h2>
