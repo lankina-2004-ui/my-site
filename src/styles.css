@@ -1706,24 +1706,24 @@ html:has(.case-page) #root {
 
   .footer__visual--mobile {
     z-index: 1;
-    top: 416px;
+    top: 417px;
     left: 50%;
     display: block;
-    width: 254px;
-    height: 396px;
-    object-fit: fill;
+    width: 272px;
+    height: auto;
+    object-fit: contain;
     transform: translateX(-50%);
   }
 
   .footer__mobile-phone {
     position: absolute;
     z-index: 1;
-    top: 416px;
+    top: 417px;
     left: 50%;
     display: block;
-    width: 254px;
-    height: 396px;
-    object-fit: fill;
+    width: 272px;
+    height: auto;
+    object-fit: contain;
     transform: translateX(-50%);
   }
 
@@ -1736,17 +1736,18 @@ html:has(.case-page) #root {
     z-index: 0;
     top: 126px;
     left: 50%;
-    width: 306px;
+    width: 375px;
     height: 292px;
-    background-image: radial-gradient(circle, rgb(26 26 26 / 13%) 0 1.1px, transparent 1.3px);
-    background-size: 5px 5px;
-    clip-path: polygon(50% 0%, 61% 34%, 98% 35%, 68% 56%, 79% 93%, 50% 71%, 21% 93%, 32% 56%, 2% 35%, 39% 34%);
+    background-image: url('../footer-mobile.png');
+    background-position: center -126px;
+    background-repeat: no-repeat;
+    background-size: 375px 812px;
     content: '';
     transform: translateX(-50%);
   }
 
   .footer__blog {
-    top: 87px;
+    top: 82px;
     left: 16px;
   }
 
@@ -1772,7 +1773,14 @@ html:has(.case-page) #root {
     transform: translateX(-50%);
     font-size: 24px;
     letter-spacing: 0;
+    color: transparent;
     line-height: 31px;
+  }
+
+  .footer__social::after {
+    bottom: 0;
+    height: 1px;
+    transform: scaleX(0);
   }
 
   .footer__social--telegram {
