@@ -11,6 +11,7 @@ import gramyDesktopDesign07 from '../Image19.png'
 import gramyDesktopDesign08 from '../Image20.png'
 import gramyDesktopDesign09 from '../Image21.png'
 import { useEffect, useRef, useState, type ReactNode } from 'react'
+import Footer from './Footer'
 
 const designImages = [
   { src: gramyDesktopDesign01, alt: 'Три экрана приложения Gramy', variant: 'wide' },
@@ -28,8 +29,8 @@ function CloseLink({ mobile = false }: { mobile?: boolean }) {
   return (
     <a
       className={`case-close ${mobile ? 'case-close--mobile' : 'case-close--desktop'}`}
-      href="#/"
-      aria-label="Вернуться на главную"
+      href="#portfolio"
+      aria-label="Вернуться к проектам"
     >
       {mobile ? 'НАЗАД [←]' : 'ЗАКРЫТЬ'}
     </a>
@@ -105,16 +106,21 @@ function GramyCase() {
   }, [])
 
   return (
-    <main className="case-page">
+    <main className="case-page gramy-case">
       <header className="site-header case-site-header" aria-label="Шапка сайта">
         <div className="intro">
           <h1>ЛАНКИНА АННА</h1>
         </div>
 
         <nav className="navigation" aria-label="Основная навигация">
-          <button className="navigation__cv" type="button">
+          <a
+            className="navigation__cv"
+            href="https://drive.google.com/file/d/1t8FkucEL94e0LH5vWGMPiHpCCUb58wzG/view?usp=sharing"
+            target="_blank"
+            rel="noreferrer"
+          >
             СМОТРЕТЬ CV
-          </button>
+          </a>
           <a
             className="navigation__contact"
             href="https://t.me/whygb"
@@ -292,6 +298,7 @@ function GramyCase() {
           </a>
         </section>
       </div>
+      <Footer />
     </main>
   )
 }

@@ -77,6 +77,10 @@ button {
   pointer-events: none;
 }
 
+.page > .site-header {
+  position: absolute;
+}
+
 .case-site-header {
   position: fixed;
   z-index: 30;
@@ -134,7 +138,7 @@ button {
 }
 
 .navigation {
-  position: absolute;
+  position: fixed;
   z-index: 3;
   top: 32px;
   right: 32px;
@@ -711,7 +715,7 @@ html:has(.case-page) #root {
   position: relative;
   min-width: 1120px;
   min-height: 100vh;
-  padding: 112px 0 88px;
+  padding: 104px 0 88px;
   overflow-x: hidden;
   background:
     radial-gradient(circle at 15% 20%, rgb(0 0 0 / 2.5%) 0 0.45px, transparent 0.75px)
@@ -756,6 +760,13 @@ html:has(.case-page) #root {
 
 .case-close--mobile {
   display: none;
+}
+
+.gramy-case .case-close--desktop {
+  top: auto;
+  right: 32px;
+  bottom: 32px;
+  left: auto;
 }
 
 .case-hero {
@@ -1074,6 +1085,10 @@ html:has(.case-page) #root {
     height: 0;
   }
 
+  .page > .site-header {
+    position: absolute;
+  }
+
   .intro {
     top: 84px;
     left: 16px;
@@ -1237,7 +1252,7 @@ html:has(.case-page) #root {
   .case-page {
     width: 100%;
     min-width: 0;
-    padding: 200px 16px 48px;
+    padding: 88px 16px 48px;
   }
 
   .case-close--desktop {
@@ -1257,6 +1272,13 @@ html:has(.case-page) #root {
     background: #fdfdfd;
     font-size: 13px;
     line-height: 48px;
+  }
+
+  .gramy-case .case-close--mobile {
+    top: auto;
+    right: 16px;
+    bottom: 24px;
+    left: auto;
   }
 
   .case-hero {
