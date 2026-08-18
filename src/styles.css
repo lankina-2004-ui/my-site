@@ -1705,11 +1705,27 @@ html:has(.case-page) #root {
   }
 
   .footer__visual--mobile {
-    display: none;
+    position: absolute;
+    z-index: 1;
+    top: 417px;
+    left: 50%;
+    display: block;
+    width: 272px;
+    height: auto;
+    object-fit: contain;
+    transform: translateX(-50%);
   }
 
   .footer__mobile-phone {
-    display: none;
+    position: absolute;
+    z-index: 1;
+    top: 417px;
+    left: 50%;
+    display: block;
+    width: 272px;
+    height: auto;
+    object-fit: contain;
+    transform: translateX(-50%);
   }
 
   .footer__mobile-star {
@@ -1771,24 +1787,24 @@ html:has(.case-page) #root {
 
   .footer__social::after {
     bottom: 0;
-    height: 1px;
+    height: 2px;
     transform: scaleX(1);
   }
 
   .footer__social--telegram {
-    top: 225px;
+    top: 249px;
     letter-spacing: 0.1px;
   }
 
   .footer__social--email {
-    top: 274px;
+    top: 298px;
     letter-spacing: 0.2px;
     transform: translateX(-50%) scaleY(0.97);
     transform-origin: center top;
   }
 
   .footer__social--instagram {
-    top: 323px;
+    top: 347px;
     right: auto;
     letter-spacing: -0.1px;
   }
