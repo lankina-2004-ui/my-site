@@ -268,11 +268,13 @@ function MySoundCase() {
             aria-label="Открыть проект ЯПОНСКИЙ КОНЦЕПТ СЪЕМКИ"
           >
             <h2 id="sound-next-title">СЛЕДУЮЩИЙ ПРОЕКТ</h2>
-            <img
-              className="case-next__image"
-              src={japanPreview}
-              alt="Японский концепт съёмки для модельного агентства"
-            />
+            <span className="case-next__image-frame">
+              <img
+                className="case-next__image"
+                src={japanPreview}
+                alt="Японский концепт съёмки для модельного агентства"
+              />
+            </span>
             <div className="case-next__meta">
               <div>
                 <h3>ЯПОНСКИЙ КОНЦЕПТ СЪЕМКИ</h3>

@@ -274,11 +274,13 @@ function GramyCase() {
             aria-label="Открыть проект MY SOUND MOBILE APP"
           >
             <h2 id="case-next-title">СЛЕДУЮЩИЙ ПРОЕКТ</h2>
-            <img
-              className="case-next__image"
-              src={gramyNextSound}
-              alt="Проект My Sound Mobile App"
-            />
+            <span className="case-next__image-frame">
+              <img
+                className="case-next__image"
+                src={gramyNextSound}
+                alt="Проект My Sound Mobile App"
+              />
+            </span>
             <div className="case-next__meta">
               <div>
                 <h3>MY SOUND MOBILE APP</h3>

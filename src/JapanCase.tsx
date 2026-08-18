@@ -222,11 +222,13 @@ function JapanCase() {
             aria-label="Открыть проект GRAMY MOBILE APP"
           >
             <h2 id="japan-next-title">СЛЕДУЮЩИЙ ПРОЕКТ</h2>
-            <img
-              className="case-next__image"
-              src={gramyPreview}
-              alt="Проект GRAMY Mobile App"
-            />
+            <span className="case-next__image-frame">
+              <img
+                className="case-next__image"
+                src={gramyPreview}
+                alt="Проект GRAMY Mobile App"
+              />
+            </span>
             <div className="case-next__meta">
               <div>
                 <h3>GRAMY MOBILE APP</h3>
