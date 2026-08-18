@@ -583,6 +583,10 @@ button {
   display: none;
 }
 
+.footer__mobile-phone {
+  display: none;
+}
+
 .footer__blog {
   position: absolute;
   z-index: 2;
@@ -1126,7 +1130,7 @@ html:has(.case-page) #root {
   }
 
   .hero__role {
-    top: 180px;
+    display: none;
     left: 87px;
     width: 128px;
     height: 24px;
@@ -1672,8 +1676,20 @@ html:has(.case-page) #root {
     top: 127px;
     left: 50%;
     display: block;
-    width: 405px;
+    width: auto;
     height: 685px;
+    transform: translateX(-50%);
+  }
+
+  .footer__mobile-phone {
+    position: absolute;
+    z-index: 1;
+    top: 416px;
+    left: 50%;
+    display: block;
+    width: 254px;
+    height: 396px;
+    object-fit: fill;
     transform: translateX(-50%);
   }
 
