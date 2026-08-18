@@ -1705,11 +1705,13 @@ html:has(.case-page) #root {
   }
 
   .footer__visual--mobile {
-    top: 127px;
+    z-index: 1;
+    top: 416px;
     left: 50%;
     display: block;
-    width: auto;
-    height: 685px;
+    width: 254px;
+    height: 396px;
+    object-fit: fill;
     transform: translateX(-50%);
   }
 
@@ -1726,16 +1728,20 @@ html:has(.case-page) #root {
   }
 
   .footer__mobile-star {
+    display: none;
+  }
+
+  .footer::before {
     position: absolute;
     z-index: 0;
     top: 126px;
     left: 50%;
-    display: block;
     width: 306px;
     height: 292px;
     background-image: radial-gradient(circle, rgb(26 26 26 / 13%) 0 1.1px, transparent 1.3px);
     background-size: 5px 5px;
     clip-path: polygon(50% 0%, 61% 34%, 98% 35%, 68% 56%, 79% 93%, 50% 71%, 21% 93%, 32% 56%, 2% 35%, 39% 34%);
+    content: '';
     transform: translateX(-50%);
   }
 
