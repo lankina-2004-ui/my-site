@@ -24,7 +24,7 @@ function CloseLink({ mobile = false }: { mobile?: boolean }) {
   return (
     <a
       className={`case-close ${mobile ? 'case-close--mobile' : 'case-close--desktop'}`}
-      href="#portfolio"
+      href={`${import.meta.env.BASE_URL}#portfolio`}
       aria-label="Вернуться к проектам"
     >
       {mobile ? 'НАЗАД [←]' : 'ЗАКРЫТЬ'}
