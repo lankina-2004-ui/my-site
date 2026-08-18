@@ -1,6 +1,6 @@
 import footerDesktopVisual from '../Image9.png'
-import footerMobileVisual from '../footer-phone-mobile.png'
-import footerMobilePhone from '../footer-phone-mobile.png'
+import footerMobileVisual from '../ChatGPT Image 17 июл_ 2026 г_, 12_46_54-no-bg-preview (carve.photos) 1.png'
+import footerMobilePhone from '../ChatGPT Image 17 июл_ 2026 г_, 12_46_54-no-bg-preview (carve.photos) 1.png'
 
 function Footer() {
   return (
