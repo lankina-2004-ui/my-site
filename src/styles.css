@@ -595,6 +595,10 @@ button {
   display: none;
 }
 
+.footer__mobile-star {
+  display: none;
+}
+
 .footer__blog {
   position: absolute;
   z-index: 2;
@@ -1718,6 +1722,20 @@ html:has(.case-page) #root {
     width: 254px;
     height: 396px;
     object-fit: fill;
+    transform: translateX(-50%);
+  }
+
+  .footer__mobile-star {
+    position: absolute;
+    z-index: 0;
+    top: 126px;
+    left: 50%;
+    display: block;
+    width: 306px;
+    height: 292px;
+    background-image: radial-gradient(circle, rgb(26 26 26 / 13%) 0 1.1px, transparent 1.3px);
+    background-size: 5px 5px;
+    clip-path: polygon(50% 0%, 61% 34%, 98% 35%, 68% 56%, 79% 93%, 50% 71%, 21% 93%, 32% 56%, 2% 35%, 39% 34%);
     transform: translateX(-50%);
   }
 
