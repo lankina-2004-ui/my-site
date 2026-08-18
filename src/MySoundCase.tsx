@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react'
+import Footer from './Footer'
 import soundContextImage from './assets/mysound/mysound-context.png'
 import soundWave from './assets/mysound/mysound-wave.png'
 import soundHero from '../Image39.png'
@@ -26,8 +27,8 @@ function CloseLink({ mobile = false }: { mobile?: boolean }) {
   return (
     <a
       className={`case-close ${mobile ? 'case-close--mobile' : 'case-close--desktop'}`}
-      href="#/"
-      aria-label="Вернуться на главную"
+      href="#portfolio"
+      aria-label="Вернуться к проектам"
     >
       {mobile ? 'НАЗАД [←]' : 'ЗАКРЫТЬ'}
     </a>
@@ -110,9 +111,14 @@ function MySoundCase() {
         </div>
 
         <nav className="navigation" aria-label="Основная навигация">
-          <button className="navigation__cv" type="button">
+          <a
+            className="navigation__cv"
+            href="https://drive.google.com/file/d/1t8FkucEL94e0LH5vWGMPiHpCCUb58wzG/view?usp=sharing"
+            target="_blank"
+            rel="noreferrer"
+          >
             СМОТРЕТЬ CV
-          </button>
+          </a>
           <a
             className="navigation__contact"
             href="https://t.me/whygb"
@@ -287,6 +293,7 @@ function MySoundCase() {
           </a>
         </section>
       </div>
+      <Footer />
     </main>
   )
 }

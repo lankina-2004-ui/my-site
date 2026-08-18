@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react'
+import Footer from './Footer'
 import gramyPreview from '../Image5.png'
 import japanHero from '../Image31.png'
 import japanContextImage from '../Image32.png'
@@ -23,8 +24,8 @@ function CloseLink({ mobile = false }: { mobile?: boolean }) {
   return (
     <a
       className={`case-close ${mobile ? 'case-close--mobile' : 'case-close--desktop'}`}
-      href="#/"
-      aria-label="Вернуться на главную"
+      href="#portfolio"
+      aria-label="Вернуться к проектам"
     >
       {mobile ? 'НАЗАД [←]' : 'ЗАКРЫТЬ'}
     </a>
@@ -107,9 +108,14 @@ function JapanCase() {
         </div>
 
         <nav className="navigation" aria-label="Основная навигация">
-          <button className="navigation__cv" type="button">
+          <a
+            className="navigation__cv"
+            href="https://drive.google.com/file/d/1t8FkucEL94e0LH5vWGMPiHpCCUb58wzG/view?usp=sharing"
+            target="_blank"
+            rel="noreferrer"
+          >
             СМОТРЕТЬ CV
-          </button>
+          </a>
           <a
             className="navigation__contact"
             href="https://t.me/whygb"
@@ -234,6 +240,7 @@ function JapanCase() {
           </a>
         </section>
       </div>
+      <Footer />
     </main>
   )
 }
