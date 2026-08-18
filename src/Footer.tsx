@@ -1,12 +1,10 @@
 import footerDesktopVisual from '../Image9.png'
-import footerMobileVisual from '../ChatGPT Image 17 июл_ 2026 г_, 12_46_54-no-bg-preview (carve.photos) 1.png'
 import footerMobilePhone from '../ChatGPT Image 17 июл_ 2026 г_, 12_46_54-no-bg-preview (carve.photos) 1.png'
 
 function Footer() {
   return (
     <footer className="footer" aria-label="Контакты">
       <img className="footer__visual footer__visual--desktop" src={footerDesktopVisual} alt="" aria-hidden="true" />
-      <img className="footer__visual footer__visual--mobile" src={footerMobileVisual} alt="" aria-hidden="true" />
       <img className="footer__mobile-phone" src={footerMobilePhone} alt="" aria-hidden="true" />
 
       <div className="footer__blog">
