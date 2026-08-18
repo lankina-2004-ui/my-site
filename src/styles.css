@@ -90,7 +90,7 @@ button {
 }
 
 .case-site-header .intro {
-  display: none;
+  display: block;
 }
 
 .intro {
