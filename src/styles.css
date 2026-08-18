@@ -85,6 +85,10 @@ button {
   width: 100%;
 }
 
+.case-site-header .intro {
+  display: none;
+}
+
 .intro {
   position: absolute;
   z-index: 2;
@@ -172,7 +176,7 @@ button {
   padding-left: 0;
   border: 1px solid #1a1a1a;
   margin-right: 0;
-  background: transparent;
+  background: #fff;
   color: #1a1a1a;
   text-align: center;
   transition:
@@ -184,7 +188,7 @@ button {
 .navigation__cv:hover,
 .navigation__cv:focus-visible {
   border-color: rgb(26 26 26 / 40%);
-  background: transparent;
+  background: #fff;
   color: rgb(26 26 26 / 40%);
   outline: none;
 }
@@ -742,10 +746,11 @@ html:has(.case-page) #root {
 
 .case-close--desktop {
   position: fixed;
-  z-index: 20;
-  top: auto;
-  bottom: 32px;
-  right: 32px;
+  z-index: 50;
+  top: 112px;
+  right: auto;
+  bottom: auto;
+  left: 32px;
   width: 104px;
 }
 
@@ -1062,7 +1067,7 @@ html:has(.case-page) #root {
   }
 
   .site-header {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -1130,9 +1135,9 @@ html:has(.case-page) #root {
   }
 
   .hero__role {
-    top: 169px;
+    top: 214px;
     display: grid;
-    left: 87px;
+    left: 94px;
     width: 128px;
     height: 24px;
     font-size: 12px;
@@ -1226,7 +1231,7 @@ html:has(.case-page) #root {
   }
 
   .case-site-header .intro {
-    display: block;
+    display: none;
   }
 
   .case-page {
@@ -1242,10 +1247,10 @@ html:has(.case-page) #root {
   .case-close--mobile {
     position: fixed;
     z-index: 50;
-    top: auto;
-    right: 16px;
-    bottom: 24px;
-    left: auto;
+    top: 72px;
+    right: auto;
+    bottom: auto;
+    left: 16px;
     display: grid;
     width: 95px;
     height: 48px;
