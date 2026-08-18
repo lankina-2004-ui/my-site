@@ -218,7 +218,7 @@ button {
   z-index: 2;
   top: calc(50% - 253px);
   left: calc(50% - 306px);
-  display: grid;
+  display: none;
   width: 128px;
   height: 24px;
   place-items: center;
@@ -1130,7 +1130,8 @@ html:has(.case-page) #root {
   }
 
   .hero__role {
-    display: none;
+    top: 169px;
+    display: grid;
     left: 87px;
     width: 128px;
     height: 24px;
