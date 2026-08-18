@@ -1710,8 +1710,8 @@ html:has(.case-page) #root {
     top: 417px;
     left: 50%;
     display: block;
-    width: 272px;
-    height: auto;
+    width: auto;
+    height: 395px;
     object-fit: contain;
     transform: translateX(-50%);
   }
@@ -1722,8 +1722,8 @@ html:has(.case-page) #root {
     top: 417px;
     left: 50%;
     display: block;
-    width: 272px;
-    height: auto;
+    width: auto;
+    height: 395px;
     object-fit: contain;
     transform: translateX(-50%);
   }
@@ -1737,12 +1737,12 @@ html:has(.case-page) #root {
     z-index: 0;
     top: 0;
     left: 50%;
-    width: 375px;
+    width: 100%;
     height: 812px;
     background-image: url('../footer-mobile-clean.png');
     background-position: center top;
     background-repeat: no-repeat;
-    background-size: 375px 812px;
+    background-size: 100% 812px;
     content: '';
     transform: translateX(-50%);
   }
