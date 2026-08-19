@@ -107,7 +107,11 @@ function MySoundCase() {
     <main className="case-page sound-case">
       <header className="site-header case-site-header" aria-label="Шапка сайта">
         <div className="intro">
-          <h1>ЛАНКИНА АННА</h1>
+          <h1>
+            <a className="intro__home-link" href={import.meta.env.BASE_URL}>
+              ЛАНКИНА АННА
+            </a>
+          </h1>
         </div>
 
         <nav className="navigation" aria-label="Основная навигация">
