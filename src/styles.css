@@ -16,7 +16,7 @@
 
 :root {
   color: #1a1a1a;
-  background: #fdfdfd;
+  background: #ffffff;
   font-family: 'Helvetica', Arial, sans-serif;
   font-synthesis: none;
   text-rendering: geometricPrecision;
@@ -51,12 +51,7 @@ button {
   position: relative;
   min-width: 1120px;
   min-height: 800px;
-  background:
-    radial-gradient(circle at 15% 20%, rgb(0 0 0 / 2.5%) 0 0.45px, transparent 0.75px)
-      0 0 / 3px 3px,
-    radial-gradient(circle at 75% 60%, rgb(0 0 0 / 1.7%) 0 0.5px, transparent 0.8px)
-      1px 1px / 4px 4px,
-    #fdfdfd;
+  background: #ffffff;
 }
 
 .home-screen,
@@ -735,12 +730,7 @@ html:has(.case-page) #root {
   min-height: 100vh;
   padding: 104px 0 88px;
   overflow-x: hidden;
-  background:
-    radial-gradient(circle at 15% 20%, rgb(0 0 0 / 2.5%) 0 0.45px, transparent 0.75px)
-      0 0 / 3px 3px,
-    radial-gradient(circle at 75% 60%, rgb(0 0 0 / 1.7%) 0 0.5px, transparent 0.8px)
-      1px 1px / 4px 4px,
-    #fdfdfd;
+  background: #ffffff;
   color: #181818;
 }
 
@@ -1312,7 +1302,7 @@ html:has(.case-page) #root {
     display: grid;
     width: 95px;
     height: 48px;
-    background: #fdfdfd;
+    background: #ffffff;
     font-size: 13px;
     line-height: 48px;
   }
