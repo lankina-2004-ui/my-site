@@ -1684,6 +1684,21 @@ html:has(.case-page) #root {
     height: 220px;
   }
 
+  .portfolio__project--ai .portfolio__preview-frame:focus {
+    outline: none;
+  }
+
+  .portfolio__project--ai .portfolio__preview-frame:focus .portfolio__coming-soon,
+  .portfolio__project--ai .portfolio__preview-frame:active .portfolio__coming-soon {
+    opacity: 1;
+  }
+
+  .portfolio__project--ai .portfolio__preview-frame:focus .portfolio__preview,
+  .portfolio__project--ai .portfolio__preview-frame:active .portfolio__preview {
+    filter: brightness(0.68);
+    scale: 1.045;
+  }
+
   .portfolio__project h3 {
     margin: 16px 0 7px;
     font-size: 19px;

@@ -239,7 +239,12 @@ function HomePage() {
         </article>
 
         <article className="portfolio__project portfolio__project--ai">
-          <span className="portfolio__preview-frame">
+          <span
+            className="portfolio__preview-frame"
+            tabIndex={0}
+            role="button"
+            aria-label="Показать статус проекта AI"
+          >
             <img
               className="portfolio__preview"
               src={aiPreview}
