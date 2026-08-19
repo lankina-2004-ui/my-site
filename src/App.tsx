@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import heroPhoto from '../hero-photo.png'
+import heroPhotoDesktop from '../image.png'
 import aboutCollage from '../Image2.png'
 import robotBadge from '../Image3.png'
 import portfolioDecoration from '../Image4.png'
@@ -7,8 +8,7 @@ import gramyPreview from '../Image5.png'
 import aiPreview from '../Image6.png'
 import soundPreview from '../Image22.png'
 import shootingPreview from '../Image8.png'
-import footerDesktopVisual from '../Image9.png'
-import footerMobileVisual from '../Image10.png'
+import Footer from './Footer'
 import GramyCase from './GramyCase'
 import JapanCase from './JapanCase'
 import MySoundCase from './MySoundCase'
@@ -17,6 +17,15 @@ import useScrollReveal from './useScrollReveal'
 function HomePage() {
   const japanProjectRef = useRef<HTMLElement | null>(null)
   const [metaOpacity, setMetaOpacity] = useState(1)
+  const formatEkaterinburgTime = () =>
+    new Intl.DateTimeFormat('en-GB', {
+      timeZone: 'Asia/Yekaterinburg',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hourCycle: 'h23',
+    }).format(new Date())
+  const [ekaterinburgTime, setEkaterinburgTime] = useState(formatEkaterinburgTime)
 
   const scrollToPortfolio = () => {
     document.getElementById('portfolio')?.scrollIntoView({
@@ -27,8 +36,9 @@ function HomePage() {
 
   useEffect(() => {
     const japanProject = japanProjectRef.current
+    const footer = document.querySelector<HTMLElement>('.page > .footer')
 
-    if (!japanProject) {
+    if (!japanProject || !footer) {
       return undefined
     }
 
@@ -39,7 +49,11 @@ function HomePage() {
       const fadeStart = 160
       const fadeEnd = 40
       const progress = (fadeStart - bottom) / (fadeStart - fadeEnd)
-      const nextOpacity = Math.max(0, Math.min(1, 1 - progress))
+      const projectOpacity = Math.max(0, Math.min(1, 1 - progress))
+      const footerTop = footer.getBoundingClientRect().top
+      const footerProgress = (window.innerHeight - footerTop) / 120
+      const footerOpacity = Math.max(0, Math.min(1, 1 - footerProgress))
+      const nextOpacity = Math.min(projectOpacity, footerOpacity)
 
       setMetaOpacity(Number(nextOpacity.toFixed(3)))
     }
@@ -60,6 +74,14 @@ function HomePage() {
     }
   }, [])
 
+  useEffect(() => {
+    const updateTime = () => setEkaterinburgTime(formatEkaterinburgTime())
+    const timerId = window.setInterval(updateTime, 1000)
+
+    updateTime()
+    return () => window.clearInterval(timerId)
+  }, [])
+
   return (
     <main className="page">
       <header className="site-header" aria-label="Шапка сайта">
@@ -68,9 +90,14 @@ function HomePage() {
         </div>
 
         <nav className="navigation" aria-label="Основная навигация">
-          <button className="navigation__cv" type="button">
+          <a
+            className="navigation__cv"
+            href="https://drive.google.com/file/d/1t8FkucEL94e0LH5vWGMPiHpCCUb58wzG/view?usp=sharing"
+            target="_blank"
+            rel="noreferrer"
+          >
             СМОТРЕТЬ CV
-          </button>
+          </a>
           <a
             className="navigation__contact"
             href="https://t.me/whygb"
@@ -93,17 +120,20 @@ function HomePage() {
 
       <aside className="location" aria-label="Местоположение и время">
         <p>LOC: EKATERINBURG, RUSSIA</p>
-        <p>TIME 14:09:46</p>
+        <p>TIME {ekaterinburgTime}</p>
       </aside>
 
       <section className="home-screen" aria-label="Главный экран">
         <section className="hero" aria-labelledby="hero-description">
           <span className="hero__role">UX/UI DESIGNER</span>
-          <img
-            className="hero__photo"
-            src={heroPhoto}
-            alt="Анна Ланкина, UX/UI дизайнер"
-          />
+          <picture>
+            <source media="(max-width: 600px)" srcSet={heroPhoto} />
+            <img
+              className="hero__photo"
+              src={heroPhotoDesktop}
+              alt="Анна Ланкина, UX/UI дизайнер"
+            />
+          </picture>
 
           <p className="hero__description" id="hero-description">
             Разрабатываю сайты, приложения,
@@ -124,25 +154,39 @@ function HomePage() {
 
       <section className="about" aria-labelledby="about-description">
         <p className="about__description" id="about-description">
-          <span className="about__line about__line--first">
-            Привет! Меня зовут Аня, я UX/UI дизайнер
-          </span>
-          <span className="about__line about__line--second">
-            с бэкграундом в бьюти- и фэшн-сфере. Создаю
-          </span>
-          <span className="about__line about__line--third">
-            человечные (
-            <img
-              className="about__captcha"
-              src={robotBadge}
-              alt="I'm not a robot"
-            />
-            <span className="about__line-ending">
-              ) сайты и приложения, помогаю
+          <span className="about__desktop-copy">
+            <span className="about__line about__line--first">
+              Привет! Меня зовут Аня, я UX/UI дизайнер
+            </span>
+            <span className="about__line about__line--second">
+              с бэкграундом в бьюти- и фэшн-сфере. Создаю
+            </span>
+            <span className="about__line about__line--third">
+              человечные (
+              <img
+                className="about__captcha"
+                src={robotBadge}
+                alt="I'm not a robot"
+              />
+              <span className="about__line-ending">
+                ) сайты и приложения, помогаю
+              </span>
+            </span>
+            <span className="about__line about__line--fourth">
+              брендам переносить характер в digital
             </span>
           </span>
-          <span className="about__line about__line--fourth">
-            брендам переносить характер в digital
+
+          <span className="about__mobile-copy">
+            <span className="about__mobile-line">Привет! Меня зовут Аня, я UX/UI</span>
+            <span className="about__mobile-line">дизайнер с&nbsp;бэкграундом в&nbsp;бьюти- и</span>
+            <span className="about__mobile-line">
+              фэшн-сфере. Создаю человечные (
+              <img className="about__captcha" src={robotBadge} alt="I'm not a robot" />
+              )
+            </span>
+            <span className="about__mobile-line">сайты и&nbsp;приложения, помогаю брендам</span>
+            <span className="about__mobile-line">переносить характер в&nbsp;digital</span>
           </span>
         </p>
 
@@ -201,6 +245,7 @@ function HomePage() {
               src={aiPreview}
               alt="AI-сервис для подбора музыки к контенту на экране ноутбука"
             />
+            <span className="portfolio__coming-soon">СКОРО ПОЯВИТСЯ</span>
           </span>
           <h3>AI</h3>
           <p>
@@ -264,60 +309,7 @@ function HomePage() {
         </article>
       </section>
 
-      <footer className="footer" aria-label="Контакты">
-        <img
-          className="footer__visual footer__visual--desktop"
-          src={footerDesktopVisual}
-          alt=""
-          aria-hidden="true"
-        />
-        <img
-          className="footer__visual footer__visual--mobile"
-          src={footerMobileVisual}
-          alt=""
-          aria-hidden="true"
-        />
-
-        <div className="footer__blog">
-          <p className="footer__blog-label">ЛИЧНЫЙ БЛОГ :)</p>
-          <a
-            className="footer__blog-channel"
-            href="https://t.me/anlankina"
-            target="_blank"
-            rel="noreferrer"
-          >
-            ТЕЛЕГРАМ КАНАЛ
-          </a>
-        </div>
-
-        <nav className="footer__socials" aria-label="Социальные сети">
-          <a
-            className="footer__social footer__social--telegram"
-            href="https://t.me/whygb"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <span className="footer__social-desktop">Telegram</span>
-            <span className="footer__social-mobile">Телеграм</span>
-          </a>
-          <a
-            className="footer__social footer__social--email"
-            href="mailto:lankina-2004@mail.ru"
-          >
-            <span className="footer__social-desktop">Email</span>
-            <span className="footer__social-mobile">Почта</span>
-          </a>
-          <a
-            className="footer__social footer__social--instagram"
-            href="https://www.instagram.com/gloombabyy?igsh=MXdvb2ZyNjhlcHhsMQ=="
-            target="_blank"
-            rel="noreferrer"
-          >
-            <span className="footer__social-desktop">Instagram</span>
-            <span className="footer__social-mobile">Инстаграм</span>
-          </a>
-        </nav>
-      </footer>
+      <Footer />
 
     </main>
   )
@@ -329,27 +321,33 @@ function App() {
   const [route, setRoute] = useState(() => window.location.hash)
 
   useEffect(() => {
-    const handleRouteChange = () => {
-      setRoute(window.location.hash)
-      window.scrollTo(0, 0)
-    }
+    const handleRouteChange = () => setRoute(window.location.hash)
 
     window.addEventListener('hashchange', handleRouteChange)
 
-    return () => {
-      window.removeEventListener('hashchange', handleRouteChange)
-    }
+    return () => window.removeEventListener('hashchange', handleRouteChange)
   }, [])
+
+  useEffect(() => {
+    if (route === '#portfolio') {
+      const frameId = window.requestAnimationFrame(() => {
+        document.getElementById('portfolio')?.scrollIntoView({ block: 'start' })
+      })
+
+      return () => window.cancelAnimationFrame(frameId)
+    }
+
+    window.scrollTo(0, 0)
+    return undefined
+  }, [route])
 
   const isGramyCase =
     window.location.pathname === '/gramy' || route === '#/gramy'
-
   const isMySoundCase =
     window.location.pathname === '/my-sound' ||
     window.location.pathname === '/mysound' ||
     route === '#/my-sound' ||
     route === '#/mysound'
-
   const isJapanCase =
     window.location.pathname === '/japan' || route === '#/japan'
 
@@ -367,4 +365,5 @@ function App() {
 
   return <HomePage />
 }
+
 export default App
