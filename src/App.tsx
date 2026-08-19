@@ -324,6 +324,31 @@ function App() {
   useScrollReveal()
 
   const [route, setRoute] = useState(() => window.location.hash)
+  const initialRouteHandled = useRef(false)
+  const navigationEntry = performance.getEntriesByType('navigation')[0] as
+    | PerformanceNavigationTiming
+    | undefined
+  const isReload = navigationEntry?.type === 'reload'
+  const scrollStorageKey = `scroll-position:${window.location.pathname}${window.location.hash}`
+
+  useEffect(() => {
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual'
+    }
+
+    const saveScrollPosition = () => {
+      const key = `scroll-position:${window.location.pathname}${window.location.hash}`
+      window.sessionStorage.setItem(key, String(window.scrollY))
+    }
+
+    window.addEventListener('pagehide', saveScrollPosition)
+    window.addEventListener('beforeunload', saveScrollPosition)
+
+    return () => {
+      window.removeEventListener('pagehide', saveScrollPosition)
+      window.removeEventListener('beforeunload', saveScrollPosition)
+    }
+  }, [])
 
   useEffect(() => {
     const handleRouteChange = () => setRoute(window.location.hash)
@@ -334,6 +359,23 @@ function App() {
   }, [])
 
   useEffect(() => {
+    const isInitialRoute = !initialRouteHandled.current
+    initialRouteHandled.current = true
+
+    if (isInitialRoute && isReload) {
+      const savedScrollPosition = Number(window.sessionStorage.getItem(scrollStorageKey))
+
+      if (Number.isFinite(savedScrollPosition)) {
+        window.requestAnimationFrame(() => {
+          window.requestAnimationFrame(() => {
+            window.scrollTo(0, savedScrollPosition)
+          })
+        })
+
+        return undefined
+      }
+    }
+
     if (route === '#portfolio') {
       const frameId = window.requestAnimationFrame(() => {
         document.getElementById('portfolio')?.scrollIntoView({ block: 'start' })
