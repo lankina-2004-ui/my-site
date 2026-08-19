@@ -709,12 +709,14 @@ button {
   transform: none;
 }
 
-.case-page > .footer .footer__social--telegram {
-  left: calc(50% - 340px);
-}
+@media (min-width: 601px) {
+  .case-page > .footer .footer__social--telegram {
+    left: calc(50% - 340px);
+  }
 
-.case-page > .footer .footer__social--instagram {
-  right: calc(50% - 340px);
+  .case-page > .footer .footer__social--instagram {
+    right: calc(50% - 340px);
+  }
 }
 
 .footer__social-mobile {
