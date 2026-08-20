@@ -39,7 +39,7 @@ jobs:
       - name: Build site
         run: |
           pnpm exec tsc -b
-          pnpm exec vite build --base=/my-site/
+          pnpm exec vite build --base=/
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
