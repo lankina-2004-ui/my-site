@@ -16,7 +16,7 @@
 
 :root {
   color: #1a1a1a;
-  background: #ffffff;
+  background: #fdfdfd;
   font-family: 'Helvetica', Arial, sans-serif;
   font-synthesis: none;
   text-rendering: geometricPrecision;
@@ -51,7 +51,12 @@ button {
   position: relative;
   min-width: 1120px;
   min-height: 800px;
-  background: #ffffff;
+  background:
+    radial-gradient(circle at 15% 20%, rgb(0 0 0 / 2.5%) 0 0.45px, transparent 0.75px)
+      0 0 / 3px 3px,
+    radial-gradient(circle at 75% 60%, rgb(0 0 0 / 1.7%) 0 0.5px, transparent 0.8px)
+      1px 1px / 4px 4px,
+    #fdfdfd;
 }
 
 .home-screen,
@@ -63,17 +68,11 @@ button {
 }
 
 .site-header {
-  position: fixed;
+  position: sticky;
   z-index: 1000;
   top: 0;
-  left: 0;
-  width: 100%;
   height: 0;
   pointer-events: none;
-}
-
-.page > .site-header {
-  position: fixed;
 }
 
 .case-site-header {
@@ -82,10 +81,6 @@ button {
   top: 0;
   left: 0;
   width: 100%;
-}
-
-.case-site-header .intro {
-  display: block;
 }
 
 .intro {
@@ -104,11 +99,6 @@ button {
   font-weight: 400;
   letter-spacing: 0.45px;
   line-height: 1.25;
-}
-
-.intro__home-link {
-  color: inherit;
-  text-decoration: none;
 }
 
 .intro__meta {
@@ -138,7 +128,7 @@ button {
 }
 
 .navigation {
-  position: fixed;
+  position: absolute;
   z-index: 3;
   top: 32px;
   right: 32px;
@@ -180,20 +170,14 @@ button {
   padding-left: 0;
   border: 1px solid #1a1a1a;
   margin-right: 0;
-  background: #fff;
-  color: #1a1a1a;
+  background: transparent;
   text-align: center;
-  transition:
-    color 140ms ease,
-    background-color 140ms ease,
-    border-color 220ms ease;
 }
 
 .navigation__cv:hover,
 .navigation__cv:focus-visible {
-  border-color: rgb(26 26 26 / 40%);
-  background: #fff;
-  color: rgb(26 26 26 / 40%);
+  background: #1a1a1a;
+  color: #fff;
   outline: none;
 }
 
@@ -224,7 +208,7 @@ button {
 .hero__role {
   position: absolute;
   z-index: 2;
-  top: calc(50% - 253px);
+  top: 186px;
   left: calc(50% - 306px);
   display: grid;
   width: 128px;
@@ -238,7 +222,7 @@ button {
 
 .hero__photo {
   position: absolute;
-  top: calc(50% - 307px);
+  top: 134px;
   left: calc(50% + 0.5px);
   display: block;
   width: 361px;
@@ -248,7 +232,7 @@ button {
 
 .hero__description {
   position: absolute;
-  top: calc(50% + 150px);
+  top: 591px;
   left: 50%;
   width: 520px;
   margin: 0;
@@ -262,7 +246,7 @@ button {
 
 .hero__projects {
   position: absolute;
-  top: calc(50% + 259px);
+  top: 700px;
   left: 50%;
   display: grid;
   height: 48px;
@@ -312,10 +296,6 @@ button {
 .about__line {
   display: block;
   height: 31px;
-}
-
-.about__mobile-copy {
-  display: none;
 }
 
 .about__line--first {
@@ -483,32 +463,10 @@ button {
 }
 
 .portfolio__preview-frame {
-  position: relative;
   display: block;
   width: 712px;
   height: 400px;
   overflow: hidden;
-}
-
-.portfolio__coming-soon {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #ffffff;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 32px;
-  font-weight: 400;
-  line-height: 1.2;
-  text-align: center;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 300ms ease;
-}
-
-.portfolio__project--ai .portfolio__preview-frame:hover .portfolio__coming-soon {
-  opacity: 1;
 }
 
 .portfolio__preview {
@@ -571,11 +529,6 @@ button {
   overflow: hidden;
 }
 
-.case-page > .footer {
-  margin-top: 120px;
-  margin-bottom: -88px;
-}
-
 .footer__visual {
   position: absolute;
   z-index: 0;
@@ -584,29 +537,20 @@ button {
 }
 
 .footer__visual--desktop {
-  top: 137px;
-  left: 50%;
+  top: 117px;
+  left: 334px;
   width: 754px;
   height: 683px;
-  transform: translateX(-50%);
 }
 
 .footer__visual--mobile {
   display: none;
 }
 
-.footer__mobile-phone {
-  display: none;
-}
-
-.footer__mobile-star {
-  display: none;
-}
-
 .footer__blog {
   position: absolute;
   z-index: 2;
-  top: 164px;
+  top: 33px;
   left: 32px;
   font-family: 'JetBrains Mono', monospace;
   font-weight: 400;
@@ -626,7 +570,6 @@ button {
 }
 
 .footer__blog-channel {
-  position: relative;
   display: block;
   margin-top: 17px !important;
   color: #181818;
@@ -641,7 +584,7 @@ button {
 .footer__social {
   position: absolute;
   z-index: 2;
-  top: 247px;
+  top: 227px;
   height: 42px;
   background: transparent;
   color: #181818;
@@ -656,67 +599,41 @@ button {
   white-space: nowrap;
 }
 
-.footer__blog-channel::after,
-.footer__social::after {
-  position: absolute;
-  right: 0;
-  bottom: -4px;
-  left: 0;
-  height: 1px;
-  background: currentColor;
-  content: '';
-  transform: scaleX(0);
-  transform-origin: left center;
-  transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.footer__social::after {
-  bottom: -2px;
-  height: 2px;
-}
-
 .footer__blog-channel:hover,
 .footer__blog-channel:focus-visible,
 .footer__social:hover,
 .footer__social:focus-visible {
-  opacity: 1;
+  text-decoration-line: underline;
+  text-decoration-color: #1a1a1a;
+  text-underline-offset: 4px;
   outline: none;
 }
 
-.footer__blog-channel:hover::after,
-.footer__blog-channel:focus-visible::after,
-.footer__social:hover::after,
-.footer__social:focus-visible::after {
-  transform: scaleX(1);
+.footer__blog-channel:hover,
+.footer__blog-channel:focus-visible {
+  text-decoration-thickness: 1px;
+}
+
+.footer__social:hover,
+.footer__social:focus-visible {
+  text-decoration-thickness: 2px;
 }
 
 .footer__social--telegram {
-  left: calc(50% - 356px);
+  left: 380px;
   letter-spacing: -0.7px;
 }
 
 .footer__social--email {
-  left: 50%;
+  left: 672px;
   letter-spacing: 0.25px;
-  transform: translateX(-50%) scaleY(0.93);
-  transform-origin: center top;
+  transform: scaleY(0.93);
 }
 
 .footer__social--instagram {
-  right: calc(50% - 356px);
-  left: auto;
+  left: 917px;
   letter-spacing: -0.3px;
   transform: none;
-}
-
-@media (min-width: 601px) {
-  .case-page > .footer .footer__social--telegram {
-    left: calc(50% - 340px);
-  }
-
-  .case-page > .footer .footer__social--instagram {
-    right: calc(50% - 340px);
-  }
 }
 
 .footer__social-mobile {
@@ -733,9 +650,14 @@ html:has(.case-page) #root {
   position: relative;
   min-width: 1120px;
   min-height: 100vh;
-  padding: 104px 0 88px;
+  padding: 112px 0 88px;
   overflow-x: hidden;
-  background: #ffffff;
+  background:
+    radial-gradient(circle at 15% 20%, rgb(0 0 0 / 2.5%) 0 0.45px, transparent 0.75px)
+      0 0 / 3px 3px,
+    radial-gradient(circle at 75% 60%, rgb(0 0 0 / 1.7%) 0 0.5px, transparent 0.8px)
+      1px 1px / 4px 4px,
+    #fdfdfd;
   color: #181818;
 }
 
@@ -763,11 +685,10 @@ html:has(.case-page) #root {
 
 .case-close--desktop {
   position: fixed;
-  z-index: 50;
-  top: 112px;
-  right: auto;
-  bottom: auto;
-  left: 32px;
+  z-index: 20;
+  top: auto;
+  bottom: 32px;
+  right: 32px;
   width: 104px;
 }
 
@@ -775,19 +696,12 @@ html:has(.case-page) #root {
   display: none;
 }
 
-.gramy-case .case-close--desktop,
-.sound-case .case-close--desktop,
-.japan-case .case-close--desktop {
-  top: auto;
-  right: 32px;
-  bottom: 32px;
-  left: auto;
-}
-
 .case-hero {
-  display: block;
-  width: 680px;
-  margin-inline: auto;
+  display: grid;
+  grid-template-columns: 280px 680px;
+  column-gap: 68px;
+  width: 1028px;
+  margin-left: 32px;
 }
 
 .case-hero__copy {
@@ -834,6 +748,7 @@ html:has(.case-page) #root {
 }
 
 .case-hero__image {
+  grid-column: 2;
   display: block;
   width: 680px;
   height: 400px;
@@ -842,7 +757,7 @@ html:has(.case-page) #root {
 
 .case-content {
   width: 680px;
-  margin-inline: auto;
+  margin-left: 380px;
 }
 
 .case-section {
@@ -967,25 +882,8 @@ html:has(.case-page) #root {
   display: block;
   width: 680px;
   height: 400px;
-  object-fit: cover;
-  transition:
-    filter 600ms ease,
-    scale 700ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.case-next__image-frame {
-  display: block;
-  width: 680px;
-  height: 400px;
   margin-top: 39px;
-  overflow: hidden;
-}
-
-.case-next__link:hover .case-next__image,
-.case-next__link:focus-visible .case-next__image,
-.case-next__link:active .case-next__image {
-  filter: brightness(0.68);
-  scale: 1.045;
+  object-fit: cover;
 }
 
 .case-next__meta {
@@ -1107,19 +1005,15 @@ html:has(.case-page) #root {
   }
 
   .site-header {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 0;
   }
 
-  .page > .site-header {
-    position: absolute;
-  }
-
   .intro {
-    top: 84px;
+    top: 128px;
     left: 16px;
   }
 
@@ -1131,7 +1025,7 @@ html:has(.case-page) #root {
 
   .home-meta {
     position: absolute;
-    top: 120px;
+    top: 158px;
     left: 16px;
     width: auto;
     height: auto;
@@ -1142,7 +1036,7 @@ html:has(.case-page) #root {
   }
 
   .navigation {
-    top: 16px;
+    top: 64px;
     right: 16px;
     left: 16px;
     justify-content: space-between;
@@ -1173,22 +1067,16 @@ html:has(.case-page) #root {
     height: 812px;
   }
 
-  .about {
-    min-height: 607px;
-    height: 607px;
-  }
-
   .hero__role {
-    top: 214px;
-    display: grid;
-    left: 94px;
+    top: 241px;
+    left: 87px;
     width: 128px;
     height: 24px;
     font-size: 12px;
   }
 
   .hero__photo {
-    top: 201px;
+    top: 241px;
     left: 49px;
     width: 277px;
     height: 335px;
@@ -1196,7 +1084,7 @@ html:has(.case-page) #root {
   }
 
   .hero__description {
-    top: 544px;
+    top: 594px;
     width: 330px;
     font-size: 16px;
     letter-spacing: -0.22px;
@@ -1204,7 +1092,7 @@ html:has(.case-page) #root {
   }
 
   .hero__projects {
-    top: 604px;
+    top: 657px;
     width: 144px;
     height: 48px;
     font-size: 13px;
@@ -1212,11 +1100,20 @@ html:has(.case-page) #root {
   }
 
   .location {
-    display: none;
+    position: absolute;
+    top: 750px;
+    left: 16px;
+    width: auto;
+    height: auto;
+    margin: 0;
+    font-size: 8px;
+    letter-spacing: 0;
+    line-height: 16px;
+    text-align: left;
   }
 
   .about__description {
-    top: 29px;
+    top: 167px;
     width: 330px;
     font-size: 16px;
     letter-spacing: -0.35px;
@@ -1226,15 +1123,6 @@ html:has(.case-page) #root {
   .about__line {
     display: inline;
     height: auto;
-  }
-
-  .about__desktop-copy {
-    display: none;
-  }
-
-  .about__mobile-copy,
-  .about__mobile-line {
-    display: block;
   }
 
   .about__line--first,
@@ -1252,7 +1140,7 @@ html:has(.case-page) #root {
   }
 
   .about__collage {
-    top: 205px;
+    top: 380px;
     left: 50%;
     width: 279px;
     height: 285px;
@@ -1264,33 +1152,29 @@ html:has(.case-page) #root {
   }
 
   .about__tag--digital {
-    top: 232px;
+    top: 405px;
     left: 48px;
   }
 
   .about__tag--beauty {
-    top: 244px;
+    top: 423px;
     right: 38px;
     left: auto;
   }
 
   .about__tag--fashion {
-    top: 458px;
+    top: 632px;
     left: 37px;
   }
 
   .case-site-header {
-    display: block;
-  }
-
-  .case-site-header .intro {
     display: none;
   }
 
   .case-page {
     width: 100%;
     min-width: 0;
-    padding: 88px 16px 48px;
+    padding: 132px 16px 48px;
   }
 
   .case-close--desktop {
@@ -1300,23 +1184,14 @@ html:has(.case-page) #root {
   .case-close--mobile {
     position: fixed;
     z-index: 50;
-    top: 72px;
-    right: auto;
-    bottom: auto;
+    top: 24px;
     left: 16px;
     display: grid;
     width: 95px;
     height: 48px;
-    background: #ffffff;
+    background: #fdfdfd;
     font-size: 13px;
     line-height: 48px;
-  }
-
-  .gramy-case .case-close--mobile {
-    top: auto;
-    right: 16px;
-    bottom: 24px;
-    left: auto;
   }
 
   .case-hero {
@@ -1477,13 +1352,8 @@ html:has(.case-page) #root {
   .case-next__image {
     width: 100%;
     height: 221px;
-    object-fit: cover;
-  }
-
-  .case-next__image-frame {
-    width: 100%;
-    height: 221px;
     margin-top: 25px;
+    object-fit: cover;
   }
 
   .case-next__meta {
@@ -1530,10 +1400,9 @@ html:has(.case-page) #root {
   }
 
   .sound-case .case-close--mobile {
-    top: auto;
-    right: 16px;
-    bottom: 24px;
-    left: auto;
+    top: 24px;
+    bottom: auto;
+    left: 16px;
   }
 
   .sound-next__tag--desktop {
@@ -1563,10 +1432,9 @@ html:has(.case-page) #root {
   }
 
   .japan-case .case-close--mobile {
-    top: auto;
-    right: 16px;
-    bottom: 24px;
-    left: auto;
+    top: 24px;
+    bottom: auto;
+    left: 16px;
   }
 
   .japan-case__solution-image {
@@ -1589,7 +1457,7 @@ html:has(.case-page) #root {
   .portfolio {
     width: 100vw;
     min-width: 0;
-    height: 810px;
+    height: 870px;
   }
 
   .portfolio-more {
@@ -1599,13 +1467,13 @@ html:has(.case-page) #root {
   }
 
   .portfolio__decoration {
-    top: -59px;
-    width: 430px;
+    top: 4px;
+    width: 400px;
     height: auto;
   }
 
   .portfolio__heading {
-    top: 50px;
+    top: 110px;
     font-size: 23px;
     line-height: 27px;
     letter-spacing: -0.3px;
@@ -1628,11 +1496,11 @@ html:has(.case-page) #root {
   }
 
   .portfolio__project--gramy {
-    top: 120px;
+    top: 180px;
   }
 
   .portfolio__project--ai {
-    top: 485px;
+    top: 545px;
   }
 
   .portfolio__project--sound {
@@ -1677,25 +1545,6 @@ html:has(.case-page) #root {
   .portfolio__preview-frame {
     width: 100%;
     height: 220px;
-  }
-
-  .portfolio__project--ai .portfolio__coming-soon {
-    font-size: 24px;
-  }
-
-  .portfolio__project--ai .portfolio__preview-frame:focus {
-    outline: none;
-  }
-
-  .portfolio__project--ai .portfolio__preview-frame:focus .portfolio__coming-soon,
-  .portfolio__project--ai .portfolio__preview-frame:active .portfolio__coming-soon {
-    opacity: 1;
-  }
-
-  .portfolio__project--ai .portfolio__preview-frame:focus .portfolio__preview,
-  .portfolio__project--ai .portfolio__preview-frame:active .portfolio__preview {
-    filter: brightness(0.68);
-    scale: 1.045;
   }
 
   .portfolio__project h3 {
@@ -1754,64 +1603,25 @@ html:has(.case-page) #root {
     height: 812px;
   }
 
-  .case-page > .footer {
-    margin: 80px 0 -48px -16px;
-  }
-
   .footer__visual--desktop {
     display: none;
   }
 
   .footer__visual--mobile {
-    position: absolute;
-    z-index: 1;
-    top: 417px;
+    top: 127px;
     left: 50%;
     display: block;
-    width: auto;
-    height: 395px;
-    object-fit: contain;
-    transform: translateX(-50%);
-  }
-
-  .footer__mobile-phone {
-    position: absolute;
-    z-index: 1;
-    top: 417px;
-    left: 50%;
-    display: block;
-    width: auto;
-    height: 395px;
-    object-fit: contain;
-    transform: translateX(-50%);
-  }
-
-  .footer__mobile-star {
-    display: none;
-  }
-
-  .footer::before {
-    position: absolute;
-    z-index: 0;
-    top: 0;
-    left: 50%;
-    width: 100%;
-    height: 812px;
-    background-image: url('../footer-mobile-clean.png');
-    background-position: center top;
-    background-repeat: no-repeat;
-    background-size: 100% 812px;
-    content: '';
+    width: 405px;
+    height: 685px;
     transform: translateX(-50%);
   }
 
   .footer__blog {
-    top: 122px;
+    top: 79px;
     left: 16px;
   }
 
   .footer__blog-label {
-    visibility: visible;
     font-size: 11.5px;
     letter-spacing: 0;
     line-height: 14px;
@@ -1825,12 +1635,6 @@ html:has(.case-page) #root {
     letter-spacing: 0;
     line-height: 16px;
     transform: translateY(1px);
-    opacity: 1;
-  }
-
-  .footer__blog-channel:hover,
-  .footer__blog-channel:focus-visible {
-    opacity: 1;
   }
 
   .footer__social {
@@ -1839,31 +1643,23 @@ html:has(.case-page) #root {
     transform: translateX(-50%);
     font-size: 24px;
     letter-spacing: 0;
-    color: #181818;
     line-height: 31px;
   }
 
-  .footer__social::after {
-    bottom: 0;
-    height: 2px;
-    transform: scaleX(1);
-  }
-
   .footer__social--telegram {
-    top: 249px;
+    top: 225px;
     letter-spacing: 0.1px;
   }
 
   .footer__social--email {
-    top: 298px;
+    top: 274px;
     letter-spacing: 0.2px;
     transform: translateX(-50%) scaleY(0.97);
     transform-origin: center top;
   }
 
   .footer__social--instagram {
-    top: 347px;
-    right: auto;
+    top: 323px;
     letter-spacing: -0.1px;
   }
 
