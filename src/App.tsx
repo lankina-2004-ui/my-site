@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
 import heroPhoto from '../hero-photo.png'
-import heroPhotoDesktop from '../image.png'
 import aboutCollage from '../Image2.png'
 import robotBadge from '../Image3.png'
 import portfolioDecoration from '../Image4.png'
@@ -8,7 +7,8 @@ import gramyPreview from '../Image5.png'
 import aiPreview from '../Image6.png'
 import soundPreview from '../Image22.png'
 import shootingPreview from '../Image8.png'
-import Footer from './Footer'
+import footerDesktopVisual from '../Image9.png'
+import footerMobileVisual from '../Image10.png'
 import GramyCase from './GramyCase'
 import JapanCase from './JapanCase'
 import MySoundCase from './MySoundCase'
@@ -17,15 +17,6 @@ import useScrollReveal from './useScrollReveal'
 function HomePage() {
   const japanProjectRef = useRef<HTMLElement | null>(null)
   const [metaOpacity, setMetaOpacity] = useState(1)
-  const formatEkaterinburgTime = () =>
-    new Intl.DateTimeFormat('en-GB', {
-      timeZone: 'Asia/Yekaterinburg',
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit',
-      hourCycle: 'h23',
-    }).format(new Date())
-  const [ekaterinburgTime, setEkaterinburgTime] = useState(formatEkaterinburgTime)
 
   const scrollToPortfolio = () => {
     document.getElementById('portfolio')?.scrollIntoView({
@@ -36,9 +27,8 @@ function HomePage() {
 
   useEffect(() => {
     const japanProject = japanProjectRef.current
-    const footer = document.querySelector<HTMLElement>('.page > .footer')
 
-    if (!japanProject || !footer) {
+    if (!japanProject) {
       return undefined
     }
 
@@ -49,11 +39,7 @@ function HomePage() {
       const fadeStart = 160
       const fadeEnd = 40
       const progress = (fadeStart - bottom) / (fadeStart - fadeEnd)
-      const projectOpacity = Math.max(0, Math.min(1, 1 - progress))
-      const footerTop = footer.getBoundingClientRect().top
-      const footerProgress = (window.innerHeight - footerTop) / 120
-      const footerOpacity = Math.max(0, Math.min(1, 1 - footerProgress))
-      const nextOpacity = Math.min(projectOpacity, footerOpacity)
+      const nextOpacity = Math.max(0, Math.min(1, 1 - progress))
 
       setMetaOpacity(Number(nextOpacity.toFixed(3)))
     }
@@ -74,14 +60,6 @@ function HomePage() {
     }
   }, [])
 
-  useEffect(() => {
-    const updateTime = () => setEkaterinburgTime(formatEkaterinburgTime())
-    const timerId = window.setInterval(updateTime, 1000)
-
-    updateTime()
-    return () => window.clearInterval(timerId)
-  }, [])
-
   return (
     <main className="page">
       <header className="site-header" aria-label="Шапка сайта">
@@ -90,14 +68,9 @@ function HomePage() {
         </div>
 
         <nav className="navigation" aria-label="Основная навигация">
-          <a
-            className="navigation__cv"
-            href="https://drive.google.com/file/d/1t8FkucEL94e0LH5vWGMPiHpCCUb58wzG/view?usp=sharing"
-            target="_blank"
-            rel="noreferrer"
-          >
+          <button className="navigation__cv" type="button">
             СМОТРЕТЬ CV
-          </a>
+          </button>
           <a
             className="navigation__contact"
             href="https://t.me/whygb"
@@ -120,20 +93,17 @@ function HomePage() {
 
       <aside className="location" aria-label="Местоположение и время">
         <p>LOC: EKATERINBURG, RUSSIA</p>
-        <p>TIME {ekaterinburgTime}</p>
+        <p>TIME 14:09:46</p>
       </aside>
 
       <section className="home-screen" aria-label="Главный экран">
         <section className="hero" aria-labelledby="hero-description">
           <span className="hero__role">UX/UI DESIGNER</span>
-          <picture>
-            <source media="(max-width: 600px)" srcSet={heroPhoto} />
-            <img
-              className="hero__photo"
-              src={heroPhotoDesktop}
-              alt="Анна Ланкина, UX/UI дизайнер"
-            />
-          </picture>
+          <img
+            className="hero__photo"
+            src={heroPhoto}
+            alt="Анна Ланкина, UX/UI дизайнер"
+          />
 
           <p className="hero__description" id="hero-description">
             Разрабатываю сайты, приложения,
@@ -154,39 +124,25 @@ function HomePage() {
 
       <section className="about" aria-labelledby="about-description">
         <p className="about__description" id="about-description">
-          <span className="about__desktop-copy">
-            <span className="about__line about__line--first">
-              Привет! Меня зовут Аня, я UX/UI дизайнер
-            </span>
-            <span className="about__line about__line--second">
-              с бэкграундом в бьюти- и фэшн-сфере. Создаю
-            </span>
-            <span className="about__line about__line--third">
-              человечные (
-              <img
-                className="about__captcha"
-                src={robotBadge}
-                alt="I'm not a robot"
-              />
-              <span className="about__line-ending">
-                ) сайты и приложения, помогаю
-              </span>
-            </span>
-            <span className="about__line about__line--fourth">
-              брендам переносить характер в digital
+          <span className="about__line about__line--first">
+            Привет! Меня зовут Аня, я UX/UI дизайнер
+          </span>
+          <span className="about__line about__line--second">
+            с бэкграундом в бьюти- и фэшн-сфере. Создаю
+          </span>
+          <span className="about__line about__line--third">
+            человечные (
+            <img
+              className="about__captcha"
+              src={robotBadge}
+              alt="I'm not a robot"
+            />
+            <span className="about__line-ending">
+              ) сайты и приложения, помогаю
             </span>
           </span>
-
-          <span className="about__mobile-copy">
-            <span className="about__mobile-line">Привет! Меня зовут Аня, я UX/UI</span>
-            <span className="about__mobile-line">дизайнер с&nbsp;бэкграундом в&nbsp;бьюти- и</span>
-            <span className="about__mobile-line">
-              фэшн-сфере. Создаю человечные (
-              <img className="about__captcha" src={robotBadge} alt="I'm not a robot" />
-              )
-            </span>
-            <span className="about__mobile-line">сайты и&nbsp;приложения, помогаю брендам</span>
-            <span className="about__mobile-line">переносить характер в&nbsp;digital</span>
+          <span className="about__line about__line--fourth">
+            брендам переносить характер в digital
           </span>
         </p>
 
@@ -217,7 +173,7 @@ function HomePage() {
         <article className="portfolio__project portfolio__project--gramy">
           <a
             className="portfolio__project-link"
-            href="#/gramy"
+            href="/gramy"
             aria-label="Открыть проект GRAMY MOBILE APP"
           >
             <span className="portfolio__preview-frame">
@@ -239,18 +195,12 @@ function HomePage() {
         </article>
 
         <article className="portfolio__project portfolio__project--ai">
-          <span
-            className="portfolio__preview-frame"
-            tabIndex={0}
-            role="button"
-            aria-label="Показать статус проекта AI"
-          >
+          <span className="portfolio__preview-frame">
             <img
               className="portfolio__preview"
               src={aiPreview}
               alt="AI-сервис для подбора музыки к контенту на экране ноутбука"
             />
-            <span className="portfolio__coming-soon">СКОРО ПОЯВИТСЯ</span>
           </span>
           <h3>AI</h3>
           <p>
@@ -267,7 +217,7 @@ function HomePage() {
         <article className="portfolio__project portfolio__project--sound">
           <a
             className="portfolio__project-link"
-            href="#/my-sound"
+            href="/my-sound"
             aria-label="Открыть проект MY SOUND MOBILE APP"
           >
             <span className="portfolio__preview-frame">
@@ -293,7 +243,7 @@ function HomePage() {
         >
           <a
             className="portfolio__project-link"
-            href="#/japan"
+            href="/japan"
             aria-label="Открыть проект ЯПОНСКИЙ КОНЦЕПТ СЪЕМКИ"
           >
             <span className="portfolio__preview-frame">
@@ -314,7 +264,60 @@ function HomePage() {
         </article>
       </section>
 
-      <Footer />
+      <footer className="footer" aria-label="Контакты">
+        <img
+          className="footer__visual footer__visual--desktop"
+          src={footerDesktopVisual}
+          alt=""
+          aria-hidden="true"
+        />
+        <img
+          className="footer__visual footer__visual--mobile"
+          src={footerMobileVisual}
+          alt=""
+          aria-hidden="true"
+        />
+
+        <div className="footer__blog">
+          <p className="footer__blog-label">ЛИЧНЫЙ БЛОГ :)</p>
+          <a
+            className="footer__blog-channel"
+            href="https://t.me/anlankina"
+            target="_blank"
+            rel="noreferrer"
+          >
+            ТЕЛЕГРАМ КАНАЛ
+          </a>
+        </div>
+
+        <nav className="footer__socials" aria-label="Социальные сети">
+          <a
+            className="footer__social footer__social--telegram"
+            href="https://t.me/whygb"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <span className="footer__social-desktop">Telegram</span>
+            <span className="footer__social-mobile">Телеграм</span>
+          </a>
+          <a
+            className="footer__social footer__social--email"
+            href="mailto:lankina-2004@mail.ru"
+          >
+            <span className="footer__social-desktop">Email</span>
+            <span className="footer__social-mobile">Почта</span>
+          </a>
+          <a
+            className="footer__social footer__social--instagram"
+            href="https://www.instagram.com/gloombabyy?igsh=MXdvb2ZyNjhlcHhsMQ=="
+            target="_blank"
+            rel="noreferrer"
+          >
+            <span className="footer__social-desktop">Instagram</span>
+            <span className="footer__social-mobile">Инстаграм</span>
+          </a>
+        </nav>
+      </footer>
 
     </main>
   )
@@ -323,80 +326,15 @@ function HomePage() {
 function App() {
   useScrollReveal()
 
-  const [route, setRoute] = useState(() => window.location.hash)
-  const initialRouteHandled = useRef(false)
-  const navigationEntry = performance.getEntriesByType('navigation')[0] as
-    | PerformanceNavigationTiming
-    | undefined
-  const isReload = navigationEntry?.type === 'reload'
-  const scrollStorageKey = `scroll-position:${window.location.pathname}${window.location.hash}`
-
-  useEffect(() => {
-    if ('scrollRestoration' in window.history) {
-      window.history.scrollRestoration = 'manual'
-    }
-
-    const saveScrollPosition = () => {
-      const key = `scroll-position:${window.location.pathname}${window.location.hash}`
-      window.sessionStorage.setItem(key, String(window.scrollY))
-    }
-
-    window.addEventListener('pagehide', saveScrollPosition)
-    window.addEventListener('beforeunload', saveScrollPosition)
-
-    return () => {
-      window.removeEventListener('pagehide', saveScrollPosition)
-      window.removeEventListener('beforeunload', saveScrollPosition)
-    }
-  }, [])
-
-  useEffect(() => {
-    const handleRouteChange = () => setRoute(window.location.hash)
-
-    window.addEventListener('hashchange', handleRouteChange)
-
-    return () => window.removeEventListener('hashchange', handleRouteChange)
-  }, [])
-
-  useEffect(() => {
-    const isInitialRoute = !initialRouteHandled.current
-    initialRouteHandled.current = true
-
-    if (isInitialRoute && isReload) {
-      const savedScrollPosition = Number(window.sessionStorage.getItem(scrollStorageKey))
-
-      if (Number.isFinite(savedScrollPosition)) {
-        window.requestAnimationFrame(() => {
-          window.requestAnimationFrame(() => {
-            window.scrollTo(0, savedScrollPosition)
-          })
-        })
-
-        return undefined
-      }
-    }
-
-    if (route === '#portfolio') {
-      const frameId = window.requestAnimationFrame(() => {
-        document.getElementById('portfolio')?.scrollIntoView({ block: 'start' })
-      })
-
-      return () => window.cancelAnimationFrame(frameId)
-    }
-
-    window.scrollTo(0, 0)
-    return undefined
-  }, [route])
-
   const isGramyCase =
-    window.location.pathname === '/gramy' || route === '#/gramy'
+    window.location.pathname === '/gramy' || window.location.hash === '#/gramy'
   const isMySoundCase =
     window.location.pathname === '/my-sound' ||
     window.location.pathname === '/mysound' ||
-    route === '#/my-sound' ||
-    route === '#/mysound'
+    window.location.hash === '#/my-sound' ||
+    window.location.hash === '#/mysound'
   const isJapanCase =
-    window.location.pathname === '/japan' || route === '#/japan'
+    window.location.pathname === '/japan' || window.location.hash === '#/japan'
 
   if (isGramyCase) {
     return <GramyCase />
