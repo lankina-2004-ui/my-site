@@ -6,16 +6,14 @@ import portfolioDecoration from '../Image4.png'
 import gramyPreview from '../Image5.png'
 import aiPreview from '../Image6.png'
 import soundPreview from '../Image22.png'
-import shootingPreview from '../Image8.png'
 import footerDesktopVisual from '../Image9.png'
 import footerMobileVisual from '../Image10.png'
 import GramyCase from './GramyCase'
-import JapanCase from './JapanCase'
 import MySoundCase from './MySoundCase'
 import useScrollReveal from './useScrollReveal'
 
 function HomePage() {
-  const japanProjectRef = useRef<HTMLElement | null>(null)
+  const lastProjectRef = useRef<HTMLElement | null>(null)
   const [metaOpacity, setMetaOpacity] = useState(1)
 
   const scrollToPortfolio = () => {
@@ -26,16 +24,16 @@ function HomePage() {
   }
 
   useEffect(() => {
-    const japanProject = japanProjectRef.current
+    const lastProject = lastProjectRef.current
 
-    if (!japanProject) {
+    if (!lastProject) {
       return undefined
     }
 
     let frameId = 0
 
     const updateMetaOpacity = () => {
-      const { bottom } = japanProject.getBoundingClientRect()
+      const { bottom } = lastProject.getBoundingClientRect()
       const fadeStart = 160
       const fadeEnd = 40
       const progress = (fadeStart - bottom) / (fadeStart - fadeEnd)
@@ -201,8 +199,9 @@ function HomePage() {
               src={aiPreview}
               alt="AI-сервис для подбора музыки к контенту на экране ноутбука"
             />
+            <span className="portfolio__coming-soon">СКОРО ПОЯВИТСЯ</span>
           </span>
-          <h3>AI</h3>
+          <h3>AI-СЕРВИС</h3>
           <p>
             Разработала AI-сервис, который считывает атмосферу
             <br className="portfolio__desktop-break" />
@@ -214,7 +213,7 @@ function HomePage() {
       </section>
 
       <section className="portfolio-more" aria-label="Другие проекты">
-        <article className="portfolio__project portfolio__project--sound">
+        <article className="portfolio__project portfolio__project--sound" ref={lastProjectRef}>
           <a
             className="portfolio__project-link"
             href="/my-sound"
@@ -234,32 +233,6 @@ function HomePage() {
               и разработала музыкальный сервис
             </p>
             <span className="portfolio__tags">&lt;MUSIC&gt;</span>
-          </a>
-        </article>
-
-        <article
-          className="portfolio__project portfolio__project--shooting"
-          ref={japanProjectRef}
-        >
-          <a
-            className="portfolio__project-link"
-            href="/japan"
-            aria-label="Открыть проект ЯПОНСКИЙ КОНЦЕПТ СЪЕМКИ"
-          >
-            <span className="portfolio__preview-frame">
-              <img
-                className="portfolio__preview"
-                src={shootingPreview}
-                alt="Концепция съёмки для модельного агентства"
-              />
-            </span>
-            <h3>ЯПОНСКИЙ КОНЦЕПТ СЪЕМКИ</h3>
-            <p>
-              Продумала и собрала концепцию съемки
-              <br />
-              для модельного агентства
-            </p>
-            <span className="portfolio__tags">&lt;MODELING&gt;</span>
           </a>
         </article>
       </section>
@@ -333,19 +306,12 @@ function App() {
     window.location.pathname === '/mysound' ||
     window.location.hash === '#/my-sound' ||
     window.location.hash === '#/mysound'
-  const isJapanCase =
-    window.location.pathname === '/japan' || window.location.hash === '#/japan'
-
   if (isGramyCase) {
     return <GramyCase />
   }
 
   if (isMySoundCase) {
     return <MySoundCase />
-  }
-
-  if (isJapanCase) {
-    return <JapanCase />
   }
 
   return <HomePage />

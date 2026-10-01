@@ -10,7 +10,8 @@ import gramyDesktopDesign06 from '../Image18.png'
 import gramyDesktopDesign07 from '../Image19.png'
 import gramyDesktopDesign08 from '../Image20.png'
 import gramyDesktopDesign09 from '../Image21.png'
-import { useEffect, useRef, useState, type ReactNode } from 'react'
+import type { ReactNode } from 'react'
+import useProjectCopyVisibility from './useProjectCopyVisibility'
 import Footer from './Footer'
 
 const designImages = [
@@ -55,55 +56,7 @@ function CaseSection({
 }
 
 function GramyCase() {
-  const lastDesignImageRef = useRef<HTMLImageElement | null>(null)
-  const [heroCopyOpacity, setHeroCopyOpacity] = useState(1)
-
-  useEffect(() => {
-    const fixedCopyTop = 112
-    let animationFrame = 0
-
-    const updateOpacity = () => {
-      animationFrame = 0
-      const lastDesignImage = lastDesignImageRef.current
-
-      if (!lastDesignImage || window.innerWidth <= 600) {
-        setHeroCopyOpacity(1)
-        return
-      }
-
-      const lastImageBottom = lastDesignImage.getBoundingClientRect().bottom
-      const fadeStart = window.innerHeight
-      const fadeEnd = fixedCopyTop
-      const fadeRange = fadeStart - fadeEnd
-      const fadeProgress = (fadeStart - lastImageBottom) / fadeRange
-      const nextOpacity = Math.max(0, Math.min(1, 1 - fadeProgress))
-
-      setHeroCopyOpacity((currentOpacity) =>
-        Math.abs(currentOpacity - nextOpacity) > 0.01 ? nextOpacity : currentOpacity,
-      )
-    }
-
-    const requestOpacityUpdate = () => {
-      if (animationFrame) {
-        return
-      }
-
-      animationFrame = window.requestAnimationFrame(updateOpacity)
-    }
-
-    requestOpacityUpdate()
-    window.addEventListener('scroll', requestOpacityUpdate, { passive: true })
-    window.addEventListener('resize', requestOpacityUpdate)
-
-    return () => {
-      if (animationFrame) {
-        window.cancelAnimationFrame(animationFrame)
-      }
-
-      window.removeEventListener('scroll', requestOpacityUpdate)
-      window.removeEventListener('resize', requestOpacityUpdate)
-    }
-  }, [])
+  const { nextProjectRef, heroCopyVisible } = useProjectCopyVisibility()
 
   return (
     <main className="case-page gramy-case">
@@ -142,8 +95,8 @@ function GramyCase() {
         <div
           className="case-hero__copy"
           style={{
-            opacity: heroCopyOpacity,
-            pointerEvents: heroCopyOpacity < 0.05 ? 'none' : 'auto',
+            opacity: heroCopyVisible ? 1 : 0,
+            pointerEvents: heroCopyVisible ? 'auto' : 'none',
           }}
         >
           <h1 id="gramy-title">GRAMY MOBILE APP</h1>
@@ -259,22 +212,21 @@ function GramyCase() {
         <section className="case-design" aria-labelledby="case-design-title">
           <h2 id="case-design-title">ДИЗАЙН</h2>
           <div className="case-gallery">
-            {designImages.map((image, index) => (
+            {designImages.map((image) => (
               <img
                 className={`case-gallery__item case-gallery__item--${image.variant}`}
                 src={image.src}
                 alt={image.alt}
                 key={image.src}
-                ref={index === designImages.length - 1 ? lastDesignImageRef : undefined}
               />
             ))}
           </div>
         </section>
 
-        <section className="case-next" aria-labelledby="case-next-title">
+        <section ref={nextProjectRef} className="case-next" aria-labelledby="case-next-title">
           <a
             className="case-next__link"
-            href="#/my-sound"
+            href="/my-sound"
             aria-label="Открыть проект MY SOUND MOBILE APP"
           >
             <h2 id="case-next-title">СЛЕДУЮЩИЙ ПРОЕКТ</h2>

@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState, type ReactNode } from 'react'
+import type { ReactNode } from 'react'
+import useProjectCopyVisibility from './useProjectCopyVisibility'
 import Footer from './Footer'
 import soundContextImage from './assets/mysound/mysound-context.png'
 import soundWave from './assets/mysound/mysound-wave.png'
@@ -10,7 +11,7 @@ import soundLibrary from '../Image26.png'
 import soundArtist from '../Image27.png'
 import soundSearchPlayer from '../Image28.png'
 import soundPremium from '../Image29.png'
-import japanPreview from '../Image30.png'
+import gramyPreview from '../Image5.png'
 
 const soundDesignImages = [
   { src: soundDesignOverview, alt: 'Три экрана приложения My Sound', variant: 'wide' },
@@ -53,55 +54,7 @@ function CaseSection({
 }
 
 function MySoundCase() {
-  const fadeAnchorRef = useRef<HTMLImageElement | null>(null)
-  const [heroCopyOpacity, setHeroCopyOpacity] = useState(1)
-
-  useEffect(() => {
-    const fixedCopyTop = 112
-    let animationFrame = 0
-
-    const updateOpacity = () => {
-      animationFrame = 0
-      const fadeAnchor = fadeAnchorRef.current
-
-      if (!fadeAnchor || window.innerWidth <= 600) {
-        setHeroCopyOpacity(1)
-        return
-      }
-
-      const anchorBottom = fadeAnchor.getBoundingClientRect().bottom
-      const fadeStart = window.innerHeight
-      const fadeEnd = fixedCopyTop
-      const fadeRange = fadeStart - fadeEnd
-      const fadeProgress = (fadeStart - anchorBottom) / fadeRange
-      const nextOpacity = Math.max(0, Math.min(1, 1 - fadeProgress))
-
-      setHeroCopyOpacity((currentOpacity) =>
-        Math.abs(currentOpacity - nextOpacity) > 0.01 ? nextOpacity : currentOpacity,
-      )
-    }
-
-    const requestOpacityUpdate = () => {
-      if (animationFrame) {
-        return
-      }
-
-      animationFrame = window.requestAnimationFrame(updateOpacity)
-    }
-
-    requestOpacityUpdate()
-    window.addEventListener('scroll', requestOpacityUpdate, { passive: true })
-    window.addEventListener('resize', requestOpacityUpdate)
-
-    return () => {
-      if (animationFrame) {
-        window.cancelAnimationFrame(animationFrame)
-      }
-
-      window.removeEventListener('scroll', requestOpacityUpdate)
-      window.removeEventListener('resize', requestOpacityUpdate)
-    }
-  }, [])
+  const { nextProjectRef, heroCopyVisible } = useProjectCopyVisibility()
 
   return (
     <main className="case-page sound-case">
@@ -140,8 +93,8 @@ function MySoundCase() {
         <div
           className="case-hero__copy"
           style={{
-            opacity: heroCopyOpacity,
-            pointerEvents: heroCopyOpacity < 0.05 ? 'none' : 'auto',
+            opacity: heroCopyVisible ? 1 : 0,
+            pointerEvents: heroCopyVisible ? 'auto' : 'none',
           }}
         >
           <h1 id="mysound-title">MY SOUND MOBILE APP</h1>
@@ -253,48 +206,40 @@ function MySoundCase() {
         <section className="case-design sound-design" aria-labelledby="mysound-design-title">
           <h2 id="mysound-design-title">ДИЗАЙН</h2>
           <div className="case-gallery sound-gallery">
-            {soundDesignImages.map((image, index) => (
+            {soundDesignImages.map((image) => (
               <img
                 className={`case-gallery__item case-gallery__item--${image.variant}`}
                 src={image.src}
                 alt={image.alt}
                 key={image.src}
-                ref={index === soundDesignImages.length - 1 ? fadeAnchorRef : undefined}
               />
             ))}
           </div>
         </section>
 
-        <section className="case-next sound-next" aria-labelledby="sound-next-title">
+        <section ref={nextProjectRef} className="case-next sound-next" aria-labelledby="sound-next-title">
           <a
             className="case-next__link"
-            href="#/japan"
-            aria-label="Открыть проект ЯПОНСКИЙ КОНЦЕПТ СЪЕМКИ"
+            href="/gramy"
+            aria-label="Открыть проект GRAMY MOBILE APP"
           >
             <h2 id="sound-next-title">СЛЕДУЮЩИЙ ПРОЕКТ</h2>
             <span className="case-next__image-frame">
               <img
                 className="case-next__image"
-                src={japanPreview}
-                alt="Японский концепт съёмки для модельного агентства"
+                src={gramyPreview}
+                alt="Мобильное приложение GRAMY на двух смартфонах"
               />
             </span>
             <div className="case-next__meta">
               <div>
-                <h3>ЯПОНСКИЙ КОНЦЕПТ СЪЕМКИ</h3>
-                <p className="case-next__text case-next__text--desktop">
-                  Собрала и продумала концепцию съемки
-                  <br />
-                  для модельного агентства
-                </p>
-                <p className="case-next__text case-next__text--mobile">
-                  Продумала и собрала концепцию съемки
-                  <br />
-                  для модельного агентства
+                <h3>GRAMY MOBILE APP</h3>
+                <p className="case-next__text">
+                  Разработала мобильное приложение, которое помогает анализировать
+                  состав косметики и оценивать на безопасность
                 </p>
               </div>
-              <span className="sound-next__tag sound-next__tag--desktop">&lt;MODELING&gt;</span>
-              <span className="sound-next__tag sound-next__tag--mobile">&lt;MODELING&gt;</span>
+              <span>&lt;BEAUTY&gt; &lt;MEDICINE&gt;</span>
             </div>
           </a>
         </section>

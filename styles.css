@@ -445,10 +445,6 @@ button {
   top: 40px;
 }
 
-.portfolio__project--shooting {
-  top: 591px;
-}
-
 .portfolio-more .portfolio__project--sound h3 {
   letter-spacing: 0.12px;
   transform: translateY(-1px) scaleY(1.1);
@@ -457,21 +453,6 @@ button {
 .portfolio-more .portfolio__project--sound p {
   letter-spacing: 0.04px;
   line-height: 23px;
-}
-
-.portfolio-more .portfolio__project--shooting h3 {
-  letter-spacing: 0.12px;
-  transform: translateY(1px) scaleY(1.07);
-}
-
-.portfolio-more .portfolio__project--shooting p {
-  letter-spacing: 0;
-  line-height: 24px;
-  transform: translateX(-1px);
-}
-
-.portfolio__project--shooting .portfolio__tags {
-  right: 0;
 }
 
 .portfolio__preview-frame {
@@ -1011,40 +992,6 @@ html:has(.case-page) #root {
   translate: 0 0;
 }
 
-.japan-case .case-hero__image,
-.japan-case .case-next__image {
-  height: auto;
-  object-fit: contain;
-}
-
-.japan-case__context-visual {
-  position: relative;
-  margin-top: 28px;
-}
-
-.japan-case__section-image {
-  display: block;
-  width: 680px;
-  height: auto;
-}
-
-.japan-case__solution-image {
-  margin-top: 29px;
-}
-
-.japan-visual {
-  margin-top: 54px;
-}
-
-.japan-gallery {
-  gap: 16px;
-  margin-top: 29px;
-}
-
-.japan-next .case-next__text {
-  max-width: 560px;
-}
-
 @media (max-width: 600px) {
   html,
   body,
@@ -1482,44 +1429,6 @@ html:has(.case-page) #root {
     display: block;
   }
 
-  .japan-case .case-hero__image,
-  .japan-case .case-next__image {
-    height: auto;
-  }
-
-  .japan-case__context-visual {
-    margin-top: 25px;
-  }
-
-  .japan-case__section-image {
-    width: 100%;
-    height: auto;
-  }
-
-  .japan-case .case-close--mobile {
-    top: auto;
-    right: 16px;
-    bottom: 24px;
-    left: auto;
-  }
-
-  .japan-case__solution-image {
-    margin-top: 25px;
-  }
-
-  .japan-visual {
-    margin-top: 32px;
-  }
-
-  .japan-gallery {
-    gap: 8px;
-    margin-top: 25px;
-  }
-
-  .japan-next .case-next__text {
-    max-width: 310px;
-  }
-
   .portfolio {
     width: 100vw;
     min-width: 0;
@@ -1573,10 +1482,6 @@ html:has(.case-page) #root {
     top: 24px;
   }
 
-  .portfolio__project--shooting {
-    top: 373px;
-  }
-
   .portfolio__project--sound .portfolio__preview {
     object-fit: cover;
     object-position: 33% center;
@@ -1595,17 +1500,6 @@ html:has(.case-page) #root {
 
   .portfolio__project--sound .portfolio__tags {
     margin-top: 9.5px;
-  }
-
-  .portfolio-more .portfolio__project--shooting h3 {
-    letter-spacing: -0.21px;
-    transform: translateY(1px) scaleY(1.07);
-  }
-
-  .portfolio-more .portfolio__project--shooting p {
-    letter-spacing: -0.02px;
-    line-height: 15px;
-    transform: none;
   }
 
   .portfolio__preview-frame {
