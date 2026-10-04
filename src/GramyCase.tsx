@@ -226,7 +226,7 @@ function GramyCase() {
         <section ref={nextProjectRef} className="case-next" aria-labelledby="case-next-title">
           <a
             className="case-next__link"
-            href="/my-sound"
+            href={`${import.meta.env.BASE_URL}#/my-sound`}
             aria-label="Открыть проект MY SOUND MOBILE APP"
           >
             <h2 id="case-next-title">СЛЕДУЮЩИЙ ПРОЕКТ</h2>

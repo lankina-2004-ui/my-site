@@ -1672,15 +1672,27 @@ a {
 }
 
 a:hover,
-.navigation a:hover,
-.navigation button:hover,
 .intro__home-link:hover,
 .portfolio__project-link:hover,
 .case-next__link:hover,
-.case-close:hover,
 .footer__blog-channel:hover,
 .footer__social:hover {
   text-decoration-line: underline;
+}
+
+.navigation a,
+.navigation button,
+.navigation a:hover,
+.navigation button:hover,
+.navigation a:focus-visible,
+.navigation button:focus-visible,
+.case-close,
+.case-close:hover,
+.case-close:focus-visible,
+.hero__projects,
+.hero__projects:hover,
+.hero__projects:focus-visible {
+  text-decoration-line: none;
 }
 
 .portfolio__project-link:hover,

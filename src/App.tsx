@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import heroPhoto from '../hero-photo.png'
 import aboutCollage from '../Image2.png'
 import robotBadge from '../Image3.png'
@@ -171,7 +171,7 @@ function HomePage() {
         <article className="portfolio__project portfolio__project--gramy">
           <a
             className="portfolio__project-link"
-            href="/gramy"
+            href={`${import.meta.env.BASE_URL}#/gramy`}
             aria-label="Открыть проект GRAMY MOBILE APP"
           >
             <span className="portfolio__preview-frame">
@@ -216,7 +216,7 @@ function HomePage() {
         <article className="portfolio__project portfolio__project--sound" ref={lastProjectRef}>
           <a
             className="portfolio__project-link"
-            href="/my-sound"
+            href={`${import.meta.env.BASE_URL}#/my-sound`}
             aria-label="Открыть проект MY SOUND MOBILE APP"
           >
             <span className="portfolio__preview-frame">
@@ -297,20 +297,32 @@ function HomePage() {
 }
 
 function App() {
-  useScrollReveal()
+  const [hash, setHash] = useState(window.location.hash)
+  const route = hash ? hash.slice(1) : window.location.pathname
+  const page = route === '/gramy' ? 'gramy' :
+    route === '/my-sound' || route === '/mysound' ? 'my-sound' : 'home'
 
-  const isGramyCase =
-    window.location.pathname === '/gramy' || window.location.hash === '#/gramy'
-  const isMySoundCase =
-    window.location.pathname === '/my-sound' ||
-    window.location.pathname === '/mysound' ||
-    window.location.hash === '#/my-sound' ||
-    window.location.hash === '#/mysound'
-  if (isGramyCase) {
+  useEffect(() => {
+    const onHashChange = () => setHash(window.location.hash)
+    window.addEventListener('hashchange', onHashChange)
+    return () => window.removeEventListener('hashchange', onHashChange)
+  }, [])
+
+  useScrollReveal(page)
+
+  useLayoutEffect(() => {
+    if (page === 'home' && hash === '#portfolio') {
+      document.getElementById('portfolio')?.scrollIntoView({ block: 'start' })
+    } else {
+      window.scrollTo(0, 0)
+    }
+  }, [page, hash])
+
+  if (page === 'gramy') {
     return <GramyCase />
   }
 
-  if (isMySoundCase) {
+  if (page === 'my-sound') {
     return <MySoundCase />
   }
 
