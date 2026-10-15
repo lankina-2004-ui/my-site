@@ -49,7 +49,6 @@ function HomePage() {
       window.removeEventListener('scroll', requestUpdate)
       window.removeEventListener('resize', requestUpdate)
     }
-  }, [])
 
   return (
     <main className="page">
@@ -227,7 +226,7 @@ function HomePage() {
             <span className="portfolio__tags">&lt;MUSIC&gt;</span>
           </a>
         </article>
-
+      </section>
       <footer className="footer" aria-label="Контакты">
         <img
           className="footer__visual footer__visual--desktop"
