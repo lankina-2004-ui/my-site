@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import heroPhoto from '../hero-photo.png'
 import aboutCollage from '../Image2.png'
 import robotBadge from '../Image3.png'
@@ -13,6 +13,7 @@ import MySoundCase from './MySoundCase'
 import useScrollReveal from './useScrollReveal'
 
 function HomePage() {
+  const lastProjectRef = useRef<HTMLElement | null>(null)
   const [metaOpacity, setMetaOpacity] = useState(1)
 
   const scrollToPortfolio = () => {
@@ -22,16 +23,17 @@ function HomePage() {
     })
   }
 
+  useEffect(() => {
+    const lastProject = lastProjectRef.current
+    if (!lastProject) return
 
     let frameId = 0
-
     const updateMetaOpacity = () => {
-      const { bottom } = japanProject.getBoundingClientRect()
+      const { bottom } = lastProject.getBoundingClientRect()
       const fadeStart = 160
       const fadeEnd = 40
       const progress = (fadeStart - bottom) / (fadeStart - fadeEnd)
       const nextOpacity = Math.max(0, Math.min(1, 1 - progress))
-
       setMetaOpacity(Number(nextOpacity.toFixed(3)))
     }
 
@@ -43,12 +45,12 @@ function HomePage() {
     updateMetaOpacity()
     window.addEventListener('scroll', requestUpdate, { passive: true })
     window.addEventListener('resize', requestUpdate)
-
     return () => {
       window.cancelAnimationFrame(frameId)
       window.removeEventListener('scroll', requestUpdate)
       window.removeEventListener('resize', requestUpdate)
     }
+  }, [])
 
   return (
     <main className="page">
@@ -72,7 +74,7 @@ function HomePage() {
         </nav>
       </header>
 
-      <aside
+       <aside
         className="intro__meta home-meta"
         aria-label="Направления и опыт"
         style={{ opacity: metaOpacity }}
@@ -147,7 +149,7 @@ function HomePage() {
         <span className="about__tag about__tag--fashion">&lt;FASHION&gt;</span>
       </section>
 
-      <section className="portfolio" id="portfolio" aria-labelledby="portfolio-heading">
+       <section className="portfolio" id="portfolio" aria-labelledby="portfolio-heading">
         <img
           className="portfolio__decoration"
           src={portfolioDecoration}
@@ -204,7 +206,7 @@ function HomePage() {
       </section>
 
       <section className="portfolio-more" aria-label="Другие проекты">
-        <article className="portfolio__project portfolio__project--sound">
+        <article className="portfolio__project portfolio__project--sound" ref={lastProjectRef}>
           <a
             className="portfolio__project-link"
             href="/my-sound"
@@ -282,7 +284,7 @@ function HomePage() {
         </nav>
       </footer>
 
-    </main>
+      </main>
   )
 }
 
