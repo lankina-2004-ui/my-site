@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useState } from 'react'
 import heroPhoto from '../hero-photo.png'
 import aboutCollage from '../Image2.png'
 import robotBadge from '../Image3.png'
@@ -6,7 +6,6 @@ import portfolioDecoration from '../Image4.png'
 import gramyPreview from '../Image5.png'
 import aiPreview from '../Image6.png'
 import soundPreview from '../Image22.png'
-import shootingPreview from '../Image8.png'
 import footerDesktopVisual from '../Image9.png'
 import footerMobileVisual from '../Image10.png'
 import GramyCase from './GramyCase'
@@ -14,7 +13,6 @@ import MySoundCase from './MySoundCase'
 import useScrollReveal from './useScrollReveal'
 
 function HomePage() {
-  const japanProjectRef = useRef<HTMLElement | null>(null)
   const [metaOpacity, setMetaOpacity] = useState(1)
 
   const scrollToPortfolio = () => {
@@ -24,12 +22,6 @@ function HomePage() {
     })
   }
 
-  useEffect(() => {
-    const japanProject = japanProjectRef.current
-
-    if (!japanProject) {
-      return undefined
-    }
 
     let frameId = 0
 
@@ -235,33 +227,6 @@ function HomePage() {
             <span className="portfolio__tags">&lt;MUSIC&gt;</span>
           </a>
         </article>
-
-        <article
-          className="portfolio__project portfolio__project--shooting"
-          ref={japanProjectRef}
-        >
-          <a
-            className="portfolio__project-link"
-            href="/japan"
-            aria-label="Открыть проект ЯПОНСКИЙ КОНЦЕПТ СЪЕМКИ"
-          >
-            <span className="portfolio__preview-frame">
-              <img
-                className="portfolio__preview"
-                src={shootingPreview}
-                alt="Концепция съёмки для модельного агентства"
-              />
-            </span>
-            <h3>ЯПОНСКИЙ КОНЦЕПТ СЪЕМКИ</h3>
-            <p>
-              Продумала и собрала концепцию съемки
-              <br />
-              для модельного агентства
-            </p>
-            <span className="portfolio__tags">&lt;MODELING&gt;</span>
-          </a>
-        </article>
-      </section>
 
       <footer className="footer" aria-label="Контакты">
         <img
