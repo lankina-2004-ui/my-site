@@ -17,7 +17,7 @@ const revealSelector = [
   '.case-next',
 ].join(', ')
 
-function useScrollReveal(page: string) {
+function useScrollReveal(page: string = 'home') {
   useLayoutEffect(() => {
     const elements = Array.from(document.querySelectorAll<HTMLElement>(revealSelector))
 
