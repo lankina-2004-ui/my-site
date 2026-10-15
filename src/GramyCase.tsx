@@ -1,3 +1,4 @@
+import HomeLogo from './HomeLogo'
 import gramyNextSound from '../Image22.png'
 import gramyDesktopHero from '../Image11.png'
 import gramyDesktopAudience from '../Image12.png'
@@ -10,9 +11,7 @@ import gramyDesktopDesign06 from '../Image18.png'
 import gramyDesktopDesign07 from '../Image19.png'
 import gramyDesktopDesign08 from '../Image20.png'
 import gramyDesktopDesign09 from '../Image21.png'
-import type { ReactNode } from 'react'
-import useProjectCopyVisibility from './useProjectCopyVisibility'
-import Footer from './Footer'
+import { useEffect, useRef, useState, type ReactNode } from 'react'
 
 const designImages = [
   { src: gramyDesktopDesign01, alt: 'Три экрана приложения Gramy', variant: 'wide' },
@@ -30,7 +29,7 @@ function CloseLink({ mobile = false }: { mobile?: boolean }) {
   return (
     <a
       className={`case-close ${mobile ? 'case-close--mobile' : 'case-close--desktop'}`}
-      href={`${import.meta.env.BASE_URL}#portfolio`}
+      href="#portfolio"
       aria-label="Вернуться к проектам"
     >
       {mobile ? 'НАЗАД [←]' : 'ЗАКРЫТЬ'}
@@ -56,23 +55,67 @@ function CaseSection({
 }
 
 function GramyCase() {
-  const { nextProjectRef, heroCopyVisible } = useProjectCopyVisibility()
+  const lastDesignImageRef = useRef<HTMLImageElement | null>(null)
+  const [heroCopyOpacity, setHeroCopyOpacity] = useState(1)
+
+  useEffect(() => {
+    const fixedCopyTop = 112
+    let animationFrame = 0
+
+    const updateOpacity = () => {
+      animationFrame = 0
+      const lastDesignImage = lastDesignImageRef.current
+
+      if (!lastDesignImage || window.innerWidth <= 600) {
+        setHeroCopyOpacity(1)
+        return
+      }
+
+      const lastImageBottom = lastDesignImage.getBoundingClientRect().bottom
+      const fadeStart = window.innerHeight
+      const fadeEnd = fixedCopyTop
+      const fadeRange = fadeStart - fadeEnd
+      const fadeProgress = (fadeStart - lastImageBottom) / fadeRange
+      const nextOpacity = Math.max(0, Math.min(1, 1 - fadeProgress))
+
+      setHeroCopyOpacity((currentOpacity) =>
+        Math.abs(currentOpacity - nextOpacity) > 0.01 ? nextOpacity : currentOpacity,
+      )
+    }
+
+    const requestOpacityUpdate = () => {
+      if (animationFrame) {
+        return
+      }
+
+      animationFrame = window.requestAnimationFrame(updateOpacity)
+    }
+
+    requestOpacityUpdate()
+    window.addEventListener('scroll', requestOpacityUpdate, { passive: true })
+    window.addEventListener('resize', requestOpacityUpdate)
+
+    return () => {
+      if (animationFrame) {
+        window.cancelAnimationFrame(animationFrame)
+      }
+
+      window.removeEventListener('scroll', requestOpacityUpdate)
+      window.removeEventListener('resize', requestOpacityUpdate)
+    }
+  }, [])
 
   return (
     <main className="case-page gramy-case">
       <header className="site-header case-site-header" aria-label="Шапка сайта">
         <div className="intro">
-          <h1>
-            <a className="intro__home-link" href={import.meta.env.BASE_URL}>
-              ЛАНКИНА АННА
-            </a>
-          </h1>
+          <h1><HomeLogo /></h1>
         </div>
 
         <nav className="navigation" aria-label="Основная навигация">
           <a
             className="navigation__cv"
-            href="https://drive.google.com/file/d/1t8FkucEL94e0LH5vWGMPiHpCCUb58wzG/view?usp=sharing"
+            href="https://drive.google.com/file/d/1zTEHQ4C6U4U8MKXMo208YZFWDYtwUNpd/view?usp=drive_link"
             target="_blank"
             rel="noreferrer"
           >
@@ -90,13 +133,14 @@ function GramyCase() {
       </header>
 
       <CloseLink />
+      <CloseLink mobile />
 
       <section className="case-hero" aria-labelledby="gramy-title">
         <div
           className="case-hero__copy"
           style={{
-            opacity: heroCopyVisible ? 1 : 0,
-            pointerEvents: heroCopyVisible ? 'auto' : 'none',
+            opacity: heroCopyOpacity,
+            pointerEvents: heroCopyOpacity < 0.05 ? 'none' : 'auto',
           }}
         >
           <h1 id="gramy-title">GRAMY MOBILE APP</h1>
@@ -135,7 +179,6 @@ function GramyCase() {
               src={gramyDesktopAudience}
               alt="Коллаж: уход за кожей, иконка приложения и косметическая текстура"
             />
-            <CloseLink mobile />
           </div>
         </CaseSection>
 
@@ -212,31 +255,30 @@ function GramyCase() {
         <section className="case-design" aria-labelledby="case-design-title">
           <h2 id="case-design-title">ДИЗАЙН</h2>
           <div className="case-gallery">
-            {designImages.map((image) => (
+            {designImages.map((image, index) => (
               <img
                 className={`case-gallery__item case-gallery__item--${image.variant}`}
                 src={image.src}
                 alt={image.alt}
                 key={image.src}
+                ref={index === designImages.length - 1 ? lastDesignImageRef : undefined}
               />
             ))}
           </div>
         </section>
 
-        <section ref={nextProjectRef} className="case-next" aria-labelledby="case-next-title">
+        <section className="case-next" aria-labelledby="case-next-title">
           <a
             className="case-next__link"
-            href={`${import.meta.env.BASE_URL}#/my-sound`}
+            href="#/my-sound"
             aria-label="Открыть проект MY SOUND MOBILE APP"
           >
             <h2 id="case-next-title">СЛЕДУЮЩИЙ ПРОЕКТ</h2>
-            <span className="case-next__image-frame">
-              <img
-                className="case-next__image"
-                src={gramyNextSound}
-                alt="Проект My Sound Mobile App"
-              />
-            </span>
+            <img
+              className="case-next__image"
+              src={gramyNextSound}
+              alt="Проект My Sound Mobile App"
+            />
             <div className="case-next__meta">
               <div>
                 <h3>MY SOUND MOBILE APP</h3>
@@ -256,7 +298,6 @@ function GramyCase() {
           </a>
         </section>
       </div>
-      <Footer />
     </main>
   )
 }

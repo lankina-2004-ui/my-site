@@ -1,6 +1,5 @@
-import type { ReactNode } from 'react'
-import useProjectCopyVisibility from './useProjectCopyVisibility'
-import Footer from './Footer'
+import HomeLogo from './HomeLogo'
+import { useEffect, useRef, useState, type ReactNode } from 'react'
 import soundContextImage from './assets/mysound/mysound-context.png'
 import soundWave from './assets/mysound/mysound-wave.png'
 import soundHero from '../Image39.png'
@@ -28,8 +27,8 @@ function CloseLink({ mobile = false }: { mobile?: boolean }) {
   return (
     <a
       className={`case-close ${mobile ? 'case-close--mobile' : 'case-close--desktop'}`}
-      href={`${import.meta.env.BASE_URL}#portfolio`}
-      aria-label="Вернуться к проектам"
+      href="#/"
+      aria-label="Вернуться на главную"
     >
       {mobile ? 'НАЗАД [←]' : 'ЗАКРЫТЬ'}
     </a>
@@ -54,28 +53,65 @@ function CaseSection({
 }
 
 function MySoundCase() {
-  const { nextProjectRef, heroCopyVisible } = useProjectCopyVisibility()
+  const fadeAnchorRef = useRef<HTMLImageElement | null>(null)
+  const [heroCopyOpacity, setHeroCopyOpacity] = useState(1)
+
+  useEffect(() => {
+    const fixedCopyTop = 112
+    let animationFrame = 0
+
+    const updateOpacity = () => {
+      animationFrame = 0
+      const fadeAnchor = fadeAnchorRef.current
+
+      if (!fadeAnchor || window.innerWidth <= 600) {
+        setHeroCopyOpacity(1)
+        return
+      }
+
+      const anchorBottom = fadeAnchor.getBoundingClientRect().bottom
+      const fadeStart = window.innerHeight
+      const fadeEnd = fixedCopyTop
+      const fadeRange = fadeStart - fadeEnd
+      const fadeProgress = (fadeStart - anchorBottom) / fadeRange
+      const nextOpacity = Math.max(0, Math.min(1, 1 - fadeProgress))
+
+      setHeroCopyOpacity((currentOpacity) =>
+        Math.abs(currentOpacity - nextOpacity) > 0.01 ? nextOpacity : currentOpacity,
+      )
+    }
+
+    const requestOpacityUpdate = () => {
+      if (animationFrame) {
+        return
+      }
+
+      animationFrame = window.requestAnimationFrame(updateOpacity)
+    }
+
+    requestOpacityUpdate()
+    window.addEventListener('scroll', requestOpacityUpdate, { passive: true })
+    window.addEventListener('resize', requestOpacityUpdate)
+
+    return () => {
+      if (animationFrame) {
+        window.cancelAnimationFrame(animationFrame)
+      }
+
+      window.removeEventListener('scroll', requestOpacityUpdate)
+      window.removeEventListener('resize', requestOpacityUpdate)
+    }
+  }, [])
 
   return (
     <main className="case-page sound-case">
       <header className="site-header case-site-header" aria-label="Шапка сайта">
         <div className="intro">
-          <h1>
-            <a className="intro__home-link" href={import.meta.env.BASE_URL}>
-              ЛАНКИНА АННА
-            </a>
-          </h1>
+          <h1><HomeLogo /></h1>
         </div>
 
         <nav className="navigation" aria-label="Основная навигация">
-          <a
-            className="navigation__cv"
-            href="https://drive.google.com/file/d/1t8FkucEL94e0LH5vWGMPiHpCCUb58wzG/view?usp=sharing"
-            target="_blank"
-            rel="noreferrer"
-          >
-            СМОТРЕТЬ CV
-          </a>
+          <a className="navigation__cv" href="https://drive.google.com/file/d/1zTEHQ4C6U4U8MKXMo208YZFWDYtwUNpd/view?usp=drive_link" target="_blank" rel="noreferrer">СМОТРЕТЬ CV</a>
           <a
             className="navigation__contact"
             href="https://t.me/whygb"
@@ -88,13 +124,14 @@ function MySoundCase() {
       </header>
 
       <CloseLink />
+      <CloseLink mobile />
 
       <section className="case-hero" aria-labelledby="mysound-title">
         <div
           className="case-hero__copy"
           style={{
-            opacity: heroCopyVisible ? 1 : 0,
-            pointerEvents: heroCopyVisible ? 'auto' : 'none',
+            opacity: heroCopyOpacity,
+            pointerEvents: heroCopyOpacity < 0.05 ? 'none' : 'auto',
           }}
         >
           <h1 id="mysound-title">MY SOUND MOBILE APP</h1>
@@ -126,7 +163,6 @@ function MySoundCase() {
               src={soundContextImage}
               alt="Главный экран приложения My Sound"
             />
-            <CloseLink mobile />
           </div>
         </CaseSection>
 
@@ -206,45 +242,50 @@ function MySoundCase() {
         <section className="case-design sound-design" aria-labelledby="mysound-design-title">
           <h2 id="mysound-design-title">ДИЗАЙН</h2>
           <div className="case-gallery sound-gallery">
-            {soundDesignImages.map((image) => (
+            {soundDesignImages.map((image, index) => (
               <img
                 className={`case-gallery__item case-gallery__item--${image.variant}`}
                 src={image.src}
                 alt={image.alt}
                 key={image.src}
+                ref={index === soundDesignImages.length - 1 ? fadeAnchorRef : undefined}
               />
             ))}
           </div>
         </section>
 
-        <section ref={nextProjectRef} className="case-next sound-next" aria-labelledby="sound-next-title">
+        <section className="case-next sound-next" aria-labelledby="sound-next-title">
           <a
             className="case-next__link"
-            href={`${import.meta.env.BASE_URL}#/gramy`}
+            href="#/gramy"
             aria-label="Открыть проект GRAMY MOBILE APP"
           >
             <h2 id="sound-next-title">СЛЕДУЮЩИЙ ПРОЕКТ</h2>
-            <span className="case-next__image-frame">
-              <img
-                className="case-next__image"
-                src={gramyPreview}
-                alt="Мобильное приложение GRAMY на двух смартфонах"
-              />
-            </span>
+            <img
+              className="case-next__image"
+              src={gramyPreview}
+              alt="Мобильное приложение GRAMY на двух смартфонах"
+            />
             <div className="case-next__meta">
               <div>
                 <h3>GRAMY MOBILE APP</h3>
-                <p className="case-next__text">
-                  Разработала мобильное приложение, которое помогает анализировать
-                  состав косметики и оценивать на безопасность
+                <p className="case-next__text case-next__text--desktop">
+                  Разработала мобильное приложение, которое помогает
+                  <br />
+                  анализировать состав косметики и оценивать на безопасность
+                </p>
+                <p className="case-next__text case-next__text--mobile">
+                  Разработала мобильное приложение, которое помогает
+                  <br />
+                  анализировать состав косметики и оценивать на безопасность
                 </p>
               </div>
-              <span>&lt;BEAUTY&gt; &lt;MEDICINE&gt;</span>
+              <span className="sound-next__tag sound-next__tag--desktop">&lt;BEAUTY&gt; &lt;MEDICINE&gt;</span>
+              <span className="sound-next__tag sound-next__tag--mobile">&lt;BEAUTY&gt; &lt;MEDICINE&gt;</span>
             </div>
           </a>
         </section>
       </div>
-      <Footer />
     </main>
   )
 }

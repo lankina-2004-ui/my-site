@@ -1,3 +1,4 @@
+import HomeLogo from './HomeLogo'
 import { useEffect, useRef, useState } from 'react'
 import heroPhoto from '../hero-photo.png'
 import aboutCollage from '../Image2.png'
@@ -6,11 +7,15 @@ import portfolioDecoration from '../Image4.png'
 import gramyPreview from '../Image5.png'
 import aiPreview from '../Image6.png'
 import soundPreview from '../Image22.png'
+import coffeePreview from './assets/simple-coffee.png'
 import footerDesktopVisual from '../Image9.png'
 import footerMobileVisual from '../Image10.png'
 import GramyCase from './GramyCase'
+import JapanCase from './JapanCase'
 import MySoundCase from './MySoundCase'
 import useScrollReveal from './useScrollReveal'
+import EkaterinburgTime from './EkaterinburgTime'
+import useScrollPosition from './useScrollPosition'
 
 function HomePage() {
   const lastProjectRef = useRef<HTMLElement | null>(null)
@@ -25,15 +30,20 @@ function HomePage() {
 
   useEffect(() => {
     const lastProject = lastProjectRef.current
-    if (!lastProject) return
+
+    if (!lastProject) {
+      return undefined
+    }
 
     let frameId = 0
+
     const updateMetaOpacity = () => {
       const { bottom } = lastProject.getBoundingClientRect()
       const fadeStart = 160
       const fadeEnd = 40
       const progress = (fadeStart - bottom) / (fadeStart - fadeEnd)
       const nextOpacity = Math.max(0, Math.min(1, 1 - progress))
+
       setMetaOpacity(Number(nextOpacity.toFixed(3)))
     }
 
@@ -45,6 +55,7 @@ function HomePage() {
     updateMetaOpacity()
     window.addEventListener('scroll', requestUpdate, { passive: true })
     window.addEventListener('resize', requestUpdate)
+
     return () => {
       window.cancelAnimationFrame(frameId)
       window.removeEventListener('scroll', requestUpdate)
@@ -56,13 +67,11 @@ function HomePage() {
     <main className="page">
       <header className="site-header" aria-label="Шапка сайта">
         <div className="intro">
-          <h1>ЛАНКИНА АННА</h1>
+          <h1><HomeLogo /></h1>
         </div>
 
         <nav className="navigation" aria-label="Основная навигация">
-          <button className="navigation__cv" type="button">
-            СМОТРЕТЬ CV
-          </button>
+          <a className="navigation__cv" href="https://drive.google.com/file/d/1zTEHQ4C6U4U8MKXMo208YZFWDYtwUNpd/view?usp=drive_link" target="_blank" rel="noreferrer">СМОТРЕТЬ CV</a>
           <a
             className="navigation__contact"
             href="https://t.me/whygb"
@@ -74,7 +83,7 @@ function HomePage() {
         </nav>
       </header>
 
-       <aside
+      <aside
         className="intro__meta home-meta"
         aria-label="Направления и опыт"
         style={{ opacity: metaOpacity }}
@@ -85,7 +94,7 @@ function HomePage() {
 
       <aside className="location" aria-label="Местоположение и время">
         <p>LOC: EKATERINBURG, RUSSIA</p>
-        <p>TIME 14:09:46</p>
+        <EkaterinburgTime />
       </aside>
 
       <section className="home-screen" aria-label="Главный экран">
@@ -149,7 +158,7 @@ function HomePage() {
         <span className="about__tag about__tag--fashion">&lt;FASHION&gt;</span>
       </section>
 
-       <section className="portfolio" id="portfolio" aria-labelledby="portfolio-heading">
+      <section className="portfolio" id="portfolio" aria-labelledby="portfolio-heading">
         <img
           className="portfolio__decoration"
           src={portfolioDecoration}
@@ -165,7 +174,7 @@ function HomePage() {
         <article className="portfolio__project portfolio__project--gramy">
           <a
             className="portfolio__project-link"
-            href="/gramy"
+            href="#/gramy"
             aria-label="Открыть проект GRAMY MOBILE APP"
           >
             <span className="portfolio__preview-frame">
@@ -193,6 +202,7 @@ function HomePage() {
               src={aiPreview}
               alt="AI-сервис для подбора музыки к контенту на экране ноутбука"
             />
+            <span className="portfolio__coming-soon">СКОРО ПОЯВИТСЯ</span>
           </span>
           <h3>AI</h3>
           <p>
@@ -206,10 +216,10 @@ function HomePage() {
       </section>
 
       <section className="portfolio-more" aria-label="Другие проекты">
-        <article className="portfolio__project portfolio__project--sound" ref={lastProjectRef}>
+        <article className="portfolio__project portfolio__project--sound">
           <a
             className="portfolio__project-link"
-            href="/my-sound"
+            href="#/my-sound"
             aria-label="Открыть проект MY SOUND MOBILE APP"
           >
             <span className="portfolio__preview-frame">
@@ -228,7 +238,24 @@ function HomePage() {
             <span className="portfolio__tags">&lt;MUSIC&gt;</span>
           </a>
         </article>
+
+        <article
+          className="portfolio__project portfolio__project--coffee"
+          ref={lastProjectRef}
+        >
+          <div className="portfolio__project-content">
+            <span className="portfolio__preview-frame">
+              <img className="portfolio__preview" src={coffeePreview} alt="Simple Coffee: три экрана мобильного приложения кофейни" width={1424} height={800} />
+            </span>
+            <h3>SIMPLE COFFEE</h3>
+            <p>
+              Концепция мобильного приложения для кофейни
+            </p>
+            <span className="portfolio__tags">&lt;HORECA&gt;</span>
+          </div>
+        </article>
       </section>
+
       <footer className="footer" aria-label="Контакты">
         <img
           className="footer__visual footer__visual--desktop"
@@ -284,20 +311,40 @@ function HomePage() {
         </nav>
       </footer>
 
-      </main>
+    </main>
   )
 }
 
 function App() {
   useScrollReveal()
+  useScrollPosition()
+
+  const [route, setRoute] = useState(() => window.location.hash)
+
+  useEffect(() => {
+    const handleRouteChange = () => {
+      setRoute(window.location.hash)
+      window.scrollTo(0, 0)
+    }
+
+    window.addEventListener('hashchange', handleRouteChange)
+
+    return () => {
+      window.removeEventListener('hashchange', handleRouteChange)
+    }
+  }, [])
 
   const isGramyCase =
-    window.location.pathname === '/gramy' || window.location.hash === '#/gramy'
+    window.location.pathname === '/gramy' || route === '#/gramy'
+
   const isMySoundCase =
     window.location.pathname === '/my-sound' ||
     window.location.pathname === '/mysound' ||
-    window.location.hash === '#/my-sound' ||
-    window.location.hash === '#/mysound'
+    route === '#/my-sound' ||
+    route === '#/mysound'
+
+  const isJapanCase =
+    window.location.pathname === '/japan' || route === '#/japan'
 
   if (isGramyCase) {
     return <GramyCase />
@@ -307,8 +354,10 @@ function App() {
     return <MySoundCase />
   }
 
+  if (isJapanCase) {
+    return <JapanCase />
+  }
 
   return <HomePage />
 }
-
 export default App

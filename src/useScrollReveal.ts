@@ -17,7 +17,7 @@ const revealSelector = [
   '.case-next',
 ].join(', ')
 
-function useScrollReveal(page: string = 'home') {
+function useScrollReveal() {
   useLayoutEffect(() => {
     const elements = Array.from(document.querySelectorAll<HTMLElement>(revealSelector))
 
@@ -70,7 +70,7 @@ function useScrollReveal(page: string = 'home') {
         element.style.removeProperty('--reveal-delay')
       })
     }
-  }, [page])
+  }, [window.location.pathname, window.location.hash])
 }
 
 export default useScrollReveal

@@ -37,9 +37,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build site
-        run: |
-          pnpm exec tsc -b
-          pnpm exec vite build --base=/
+        run: pnpm build
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
