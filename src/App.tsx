@@ -10,7 +10,6 @@ import shootingPreview from '../Image8.png'
 import footerDesktopVisual from '../Image9.png'
 import footerMobileVisual from '../Image10.png'
 import GramyCase from './GramyCase'
-import JapanCase from './JapanCase'
 import MySoundCase from './MySoundCase'
 import useScrollReveal from './useScrollReveal'
 
@@ -333,8 +332,6 @@ function App() {
     window.location.pathname === '/mysound' ||
     window.location.hash === '#/my-sound' ||
     window.location.hash === '#/mysound'
-  const isJapanCase =
-    window.location.pathname === '/japan' || window.location.hash === '#/japan'
 
   if (isGramyCase) {
     return <GramyCase />
@@ -344,9 +341,6 @@ function App() {
     return <MySoundCase />
   }
 
-  if (isJapanCase) {
-    return <JapanCase />
-  }
 
   return <HomePage />
 }
