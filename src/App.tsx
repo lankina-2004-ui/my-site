@@ -5,7 +5,7 @@ import aboutCollage from '../Image2.png'
 import robotBadge from '../Image3.png'
 import portfolioDecoration from '../Image4.png'
 import gramyPreview from '../Image5.png'
-import aiPreview from '../Image6.png'
+import aiPreview from './assets/ai-preview.png'
 import soundPreview from '../Image22.png'
 import coffeePreview from './assets/simple-coffee.png'
 import footerDesktopVisual from '../Image9.png'
@@ -202,7 +202,6 @@ function HomePage() {
               src={aiPreview}
               alt="AI-сервис для подбора музыки к контенту на экране ноутбука"
             />
-            <span className="portfolio__coming-soon">СКОРО ПОЯВИТСЯ</span>
           </span>
           <h3>AI</h3>
           <p>
