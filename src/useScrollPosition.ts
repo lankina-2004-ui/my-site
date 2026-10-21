@@ -1,12 +1,20 @@
-import { useLayoutEffect } from 'react'
+import { useLayoutEffect, useRef } from 'react'
 
 export default function useScrollPosition() {
+  const previousRoute = useRef(`${window.location.pathname}${window.location.hash}`)
+
   useLayoutEffect(() => {
-    const key = `scroll-position:${window.location.pathname}${window.location.hash}`
+    const route = `${window.location.pathname}${window.location.hash}`
+    const openProjectFromTop = previousRoute.current !== route &&
+      /^#\/(gramy|my-sound|mysound|japan)$/.test(window.location.hash)
+    previousRoute.current = route
+    const key = `scroll-position:${route}`
     const previousRestoration = window.history.scrollRestoration
     window.history.scrollRestoration = 'manual'
     let target = 0
-    try { target = Number(sessionStorage.getItem(key)) || 0 } catch { /* Storage can be unavailable. */ }
+    if (!openProjectFromTop) {
+      try { target = Number(sessionStorage.getItem(key)) || 0 } catch { /* Storage can be unavailable. */ }
+    }
     let restoring = true
     let frame = 0
     const started = performance.now()

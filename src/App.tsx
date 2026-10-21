@@ -5,7 +5,8 @@ import aboutCollage from '../Image2.png'
 import robotBadge from '../Image3.png'
 import portfolioDecoration from '../Image4.png'
 import gramyPreview from '../Image5.png'
-import aiPreview from './assets/ai-preview.png'
+import aiPreviewDesktop from './assets/ai-preview-desktop.png'
+import aiPreviewMobile from './assets/ai-preview-mobile.png'
 import soundPreview from '../Image22.png'
 import coffeePreview from './assets/simple-coffee.png'
 import footerDesktopVisual from '../Image9.png'
@@ -196,13 +197,16 @@ function HomePage() {
         </article>
 
         <article className="portfolio__project portfolio__project--ai">
-          <span className="portfolio__preview-frame">
+          <picture className="portfolio__preview-frame">
+            <source media="(max-width: 600px)" srcSet={aiPreviewMobile} />
             <img
               className="portfolio__preview"
-              src={aiPreview}
+              src={aiPreviewDesktop}
               alt="AI-сервис для подбора музыки к контенту на экране ноутбука"
+              width={2136}
+              height={1200}
             />
-          </span>
+          </picture>
           <h3>AI</h3>
           <p>
             Разработала AI-сервис, который считывает атмосферу

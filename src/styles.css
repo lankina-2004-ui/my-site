@@ -275,6 +275,7 @@ overflow:hidden}
 width:100%;
 height:100%;
 transition:filter .6s ease,scale .7s cubic-bezier(.22,1,.36,1)}
+.portfolio__project--ai .portfolio__preview { object-fit: cover; object-position: center; }
 .portfolio__preview-frame:hover .portfolio__preview,.portfolio__project-link:focus-visible .portfolio__preview{filter:brightness(.68);
 scale:1.045}
 .portfolio__project.portfolio__project--coffee {
@@ -892,11 +893,28 @@ transition:none}
   .case-page .case-close--mobile {
     position: fixed;
     top: auto;
-    /* iPhone 15 (852px): button top 684px, CV top 24px, offset 660px. */
-    bottom: 120px;
-    bottom: clamp(16px, calc(100dvh - 128px), 120px);
+    /* 64px below the previous position; keep the button inside the viewport. */
+    bottom: 56px;
+    bottom: clamp(16px, calc(100dvh - 192px), 56px);
     left: 16px;
     z-index: 1001;
+    background: #fff;
+    color: #1a1a1a;
+    transition: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .case-page .case-close--mobile:hover,
+  .case-page .case-close--mobile:focus-visible {
+    background: #fff;
+    color: #1a1a1a;
+  }
+  .case-page .case-close--mobile:focus-visible {
+    outline: 2px solid #1a1a1a;
+    outline-offset: 3px;
+  }
+  .case-page .case-close--mobile:active {
+    background: #000;
+    color: #fff;
   }
   .case-page { padding-top: 152px; }
   .footer__visual--mobile { top: 415px; width: min(100vw, 375px); height: auto; object-fit: contain; }
