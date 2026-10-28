@@ -8,7 +8,8 @@ import gramyPreview from '../Image5.png'
 import aiPreviewDesktop from './assets/ai-preview-desktop.png'
 import aiPreviewMobile from './assets/ai-preview-mobile.png'
 import soundPreview from '../Image22.png'
-import coffeePreview from './assets/simple-coffee.png'
+import coffeePreviewDesktop from './assets/simple-coffee-desktop.png'
+import coffeePreviewMobile from './assets/simple-coffee-mobile.png'
 import footerDesktopVisual from '../Image9.png'
 import footerMobileVisual from '../Image10.png'
 import GramyCase from './GramyCase'
@@ -127,10 +128,10 @@ function HomePage() {
       <section className="about" aria-labelledby="about-description">
         <p className="about__description" id="about-description">
           <span className="about__line about__line--first">
-            Привет! Меня зовут Аня, я UX/UI дизайнер
+            Привет! Меня зовут Аня, я UX/UI дизайнер{' '}
           </span>
           <span className="about__line about__line--second">
-            с бэкграундом в бьюти- и фэшн-сфере. Создаю
+            с бэкграундом в бьюти- и фэшн-сфере. Создаю{' '}
           </span>
           <span className="about__line about__line--third">
             человечные (
@@ -140,7 +141,7 @@ function HomePage() {
               alt="I'm not a robot"
             />
             <span className="about__line-ending">
-              ) сайты и приложения, помогаю
+              ) сайты и приложения, помогаю{' '}
             </span>
           </span>
           <span className="about__line about__line--fourth">
@@ -247,9 +248,10 @@ function HomePage() {
           ref={lastProjectRef}
         >
           <div className="portfolio__project-content">
-            <span className="portfolio__preview-frame">
-              <img className="portfolio__preview" src={coffeePreview} alt="Simple Coffee: три экрана мобильного приложения кофейни" width={1424} height={800} />
-            </span>
+            <picture className="portfolio__preview-frame">
+              <source media="(max-width: 600px)" srcSet={coffeePreviewMobile} width={1029} height={660} />
+              <img className="portfolio__preview" src={coffeePreviewDesktop} alt="Simple Coffee: три экрана мобильного приложения кофейни" width={1424} height={800} />
+            </picture>
             <h3>SIMPLE COFFEE</h3>
             <p>
               Концепция мобильного приложения для кофейни
